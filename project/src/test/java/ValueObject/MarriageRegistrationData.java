@@ -1,0 +1,87 @@
+package ValueObject;
+
+public record MarriageRegistrationData(
+        String lastNameCitizenData,
+        String nameCitizenData,
+        String patronymicCitizenData,
+        String dateOfBirthCitizenData,
+        String passportCitizenData,
+        String genderCitizenData,
+        String addressCitizenData,
+        String dateOfRegistrationServiceData,
+        String newLastNameServiceData,
+        String spousesLastNameServiceData,
+        String spousesNameServiceData,
+        String spousesPatronymicServiceData,
+        String spousesDateOfBirthServiceData,
+        String spousesPassportServiceData
+) {
+
+    public MarriageRegistrationData {
+        if (lastNameCitizenData == null || lastNameCitizenData.isBlank())
+            throw new IllegalArgumentException("Фамилия гражданина обязательна");
+        if (lastNameCitizenData.length() > 100)
+            throw new IllegalArgumentException("Фамилия гражданина не более 100 символов");
+        if (nameCitizenData == null || nameCitizenData.isBlank())
+            throw new IllegalArgumentException("Имя гражданина обязательно");
+        if (nameCitizenData.length() > 100) throw new IllegalArgumentException("Имя гражданина не более 100 символов");
+        if (patronymicCitizenData == null || patronymicCitizenData.isBlank())
+            throw new IllegalArgumentException("Отчество гражданина обязательно");
+        if (patronymicCitizenData.length() > 100)
+            throw new IllegalArgumentException("Отчество гражданина не более 100 символов");
+        if (!patronymicCitizenData.matches("^[A-Za-z]+$"))
+            throw new IllegalArgumentException("Отчество гражданина: только латиница без спецсимволов");
+        if (dateOfBirthCitizenData == null || dateOfBirthCitizenData.isBlank())
+            throw new IllegalArgumentException("Дата рождения обязательна");
+        if (passportCitizenData == null || passportCitizenData.isBlank())
+            throw new IllegalArgumentException("Паспорт гражданина обязателен");
+        if (!passportCitizenData.matches("^[А-Яа-яЁё0-8]{1,8}$"))
+            throw new IllegalArgumentException("Паспорт гражданина: до 8 символов, только русские буквы и цифры 0-8");
+        if (genderCitizenData == null || (!genderCitizenData.equals("Male") && !genderCitizenData.equals("Female"))) {
+            throw new IllegalArgumentException("Пол должен быть 'Male' или 'Female'");
+        }
+        if (addressCitizenData != null && !addressCitizenData.isBlank()) {
+            if (addressCitizenData.length() > 50)
+                throw new IllegalArgumentException("Адрес гражданина не более 50 символов");
+        }
+        if (dateOfRegistrationServiceData == null || dateOfRegistrationServiceData.isBlank()) {
+            throw new IllegalArgumentException("Дата регистрации обязательна");
+        }
+        if (dateOfRegistrationServiceData.length() > 7) {
+            throw new IllegalArgumentException("Дата регистрации: не более 7 символов");
+        }
+        if (spousesLastNameServiceData == null || spousesLastNameServiceData.isBlank()) {
+            throw new IllegalArgumentException("Фамилия супруга обязательна");
+        }
+        if (spousesLastNameServiceData.length() > 50) {
+            throw new IllegalArgumentException("Фамилия супруга не более 50 символов");
+        }
+        if (spousesNameServiceData == null || spousesNameServiceData.isBlank()) {
+            throw new IllegalArgumentException("Имя супруга обязательно");
+        }
+        if (spousesNameServiceData.length() > 20) {
+            throw new IllegalArgumentException("Имя супруга не более 20 символов");
+        }
+        if (spousesPatronymicServiceData == null || spousesPatronymicServiceData.isBlank()) {
+            throw new IllegalArgumentException("Отчество супруги обязательно");
+        }
+        if (spousesPatronymicServiceData.length() > 20) {
+            throw new IllegalArgumentException("Отчество супруги не более 20 символов");
+        }
+        if (spousesDateOfBirthServiceData == null || spousesDateOfBirthServiceData.isBlank()) {
+            throw new IllegalArgumentException("Дата рождения супруга обязательна");
+        }
+        if (spousesDateOfBirthServiceData.length() > 7) {
+            throw new IllegalArgumentException("Дата рождения супруга: не более 7 символов");
+        }
+        if (spousesPassportServiceData == null || spousesPassportServiceData.isBlank()) {
+            throw new IllegalArgumentException("Паспорт супруги обязателен");
+        }
+        if (!spousesPassportServiceData.matches("^[А-Яа-яЁё0-8]{1,8}$")) {
+            throw new IllegalArgumentException("Паспорт супруги: до 8 символов, только русские буквы и цифры 0-8");
+        }
+        if (newLastNameServiceData != null && newLastNameServiceData.length() > 100) {
+            throw new IllegalArgumentException("Новая фамилия не более 100 символов");
+        }
+    }
+}
