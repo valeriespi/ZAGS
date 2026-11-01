@@ -47,9 +47,8 @@ public record MarriageRegistrationData(
         if (dateOfRegistrationServiceData == null || dateOfRegistrationServiceData.isBlank()) {
             throw new IllegalArgumentException("Дата регистрации обязательна");
         }
-        if (dateOfRegistrationServiceData.length() > 7) {
-            throw new IllegalArgumentException("Дата регистрации: не более 7 символов");
-        }
+        if (dateOfRegistrationServiceData.length() > 10)
+            throw new IllegalArgumentException("Дата регистрации: не более 10 символов");
         if (spousesLastNameServiceData == null || spousesLastNameServiceData.isBlank()) {
             throw new IllegalArgumentException("Фамилия супруга обязательна");
         }
@@ -71,9 +70,8 @@ public record MarriageRegistrationData(
         if (spousesDateOfBirthServiceData == null || spousesDateOfBirthServiceData.isBlank()) {
             throw new IllegalArgumentException("Дата рождения супруга обязательна");
         }
-        if (spousesDateOfBirthServiceData.length() > 7) {
-            throw new IllegalArgumentException("Дата рождения супруга: не более 7 символов");
-        }
+        if (spousesDateOfBirthServiceData.length() > 10)
+            throw new IllegalArgumentException("Дата рождения супруга: не более 10 символов");
         if (spousesPassportServiceData == null || spousesPassportServiceData.isBlank()) {
             throw new IllegalArgumentException("Паспорт супруги обязателен");
         }
