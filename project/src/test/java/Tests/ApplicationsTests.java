@@ -59,8 +59,10 @@ public class ApplicationsTests {
 
         mainPage.clickButtonLoginAsUser();
         applicantDataForm.fillInAllFields(applicantDataFormVO);
+        applicantDataForm.clickButtonNext();
         choiceOfServicePage.clickButtonMarriageRegistration();
         marriageRegistrationCitizenDataForm.fillInAllFields(marriageRegistration);
+        marriageRegistrationCitizenDataForm.clickButtonNext();
         marriageRegistrationServiceDataForm.fillInAllFields(marriageRegistration);
         marriageRegistrationServiceDataForm.clickButtonFinish();
 
@@ -88,8 +90,10 @@ public class ApplicationsTests {
 
         mainPage.clickButtonLoginAsUser();
         applicantDataForm.fillInAllFields(applicantDataFormVO);
+        applicantDataForm.clickButtonNext();
         choiceOfServicePage.clickButtonBirthRegistration();
         birthRegistrationCitizenDataForm.fillInAllFields(birthRegistration);
+        birthRegistrationCitizenDataForm.clickButtonNext();
         birthRegistrationServiceDataForm.fillInAllFields(birthRegistration);
         birthRegistrationServiceDataForm.clickButtonFinish();
 
@@ -114,8 +118,10 @@ public class ApplicationsTests {
 
         mainPage.clickButtonLoginAsUser();
         applicantDataForm.fillInAllFields(applicantDataFormVO);
+        applicantDataForm.clickButtonNext();
         choiceOfServicePage.clickButtonDeathRegistration();
         deathRegistrationCitizenDataForm.fillInAllFields(deathRegistration);
+        deathRegistrationCitizenDataForm.clickButtonNext();
         deathRegistrationServiceDataForm.fillInAllFields(deathRegistration);
         deathRegistrationServiceDataForm.clickButtonFinish();
 
@@ -173,14 +179,19 @@ public class ApplicationsTests {
 
         mainPage.clickButtonLoginAsUser();
         applicantDataForm.fillInAllFields(applicantDataFormVO);
+        applicantDataForm.clickButtonNext();
         choiceOfServicePage.clickButtonMarriageRegistration();
         marriageRegistrationCitizenDataForm.fillInAllFields(marriageRegistration);
+        marriageRegistrationCitizenDataForm.clickButtonNext();
         marriageRegistrationServiceDataForm.fillInAllFields(marriageRegistration);
         marriageRegistrationServiceDataForm.clickButtonFinish();
+
+        applicationStatusPage.clickButtonRefresh();
 
         String applicationNumber = applicationStatusPage.getApplicationNumber();
         String statusFromStatusPage = applicationStatusPage.getStatus();
 
+        driver.get("https://user:senlatest@regoffice.senla.eu");
         mainPage.clickButtonLoginAsAdmin();
 
         adminDataForm.fillInAllFields(adminRegistration);
@@ -188,7 +199,9 @@ public class ApplicationsTests {
 
         String actualStatus = applicationTable.getApplicationStatus(applicationNumber);
 
-        Assertions.assertEquals(statusFromStatusPage.replace(".", ""), actualStatus.replace(".", ""),
-                "Статус заявки " + applicationNumber + " из таблицы не совпал со статусом со страницы 'Статус заявки'");
+        Assertions.assertEquals(statusFromStatusPage.replace(".", ""),
+                actualStatus.replace(".", ""),
+                "Статус заявки " + applicationNumber +
+                        " из таблицы не совпал со статусом со страницы 'Статус заявки'");
     }
 }

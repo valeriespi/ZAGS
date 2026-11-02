@@ -8,22 +8,22 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AdminDataForm {
 
-    @FindBy(id = "TextInputField-123")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Фамилия')]/following::input[1]")
     private WebElement fieldLastName;
 
-    @FindBy(id = "TextInputField-124")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Имя')]/following::input[1]")
     private WebElement fieldName;
 
-    @FindBy(id = "TextInputField-125")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Отчество')]/following::input[1]")
     private WebElement fieldPatronymic;
 
-    @FindBy(id = "TextInputField-126")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Телефон')]/following::input[1]")
     private WebElement fieldPhone;
 
-    @FindBy(id = "TextInputField-127")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Номер паспорта')]/following::input[1]")
     private WebElement fieldPassport;
 
-    @FindBy(id = "TextInputField-128")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Дата рождения')]/following::input[1]")
     private WebElement fieldBirthDate;
 
     @FindBy(xpath = "//button[text() = 'Далее']")

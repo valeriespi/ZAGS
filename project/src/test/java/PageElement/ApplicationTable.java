@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ApplicationTable {
 
-    @FindBy(xpath = "//th[text() = 'Заявитель'/ancestor::table[1]]")
+    @FindBy(xpath = "//th[contains(normalize-space(), 'Заявитель')]/ancestor::table[1]")
     private WebElement applicationTable;
 
     public ApplicationTable(WebDriver driver) {
@@ -20,14 +20,14 @@ public class ApplicationTable {
     public String getApplicationStatus(String applicationNumber) {
 
         final int STATUS_COLUMN_INDEX = 4;
-        List<WebElement> rows = applicationTable.findElements(By.cssSelector(":scope > tr"));
-
-        if (rows.isEmpty()) {
-            return "Таблица пуста, не удалось найти заявку";
-        }
+        List<WebElement> rows = applicationTable.findElements(By.cssSelector("tr"));
 
         for (WebElement r : rows) {
             List<WebElement> rowElements = r.findElements(By.cssSelector("td"));
+            // строка заголовка содержит только th — пропускаем её
+            if (rowElements.isEmpty()) {
+                continue;
+            }
             String applicationNumberActual = rowElements.getFirst().getText();
 
             if (applicationNumberActual.equals(applicationNumber)) {

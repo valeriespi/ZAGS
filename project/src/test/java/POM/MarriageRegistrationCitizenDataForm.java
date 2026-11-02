@@ -8,25 +8,25 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MarriageRegistrationCitizenDataForm {
 
-    @FindBy(id = "TextInputField-7")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Фамилия')]/following::input[1]")
     private WebElement fieldLastName;
 
-    @FindBy(id = "TextInputField-8")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Имя')]/following::input[1]")
     private WebElement fieldName;
 
-    @FindBy(id = "TextInputField-9")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Отчество')]/following::input[1]")
     private WebElement fieldPatronymic;
 
-    @FindBy(id = "TextInputField-10")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Дата рождения')]/following::input[1]")
     private WebElement fieldDateOfBirth;
 
-    @FindBy(id = "TextInputField-11")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Номер паспорта')]/following::input[1]")
     private WebElement fieldPassport;
 
-    @FindBy(id = "TextInputField-12")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Пол')]/following::input[1]")
     private WebElement fieldGender;
 
-    @FindBy(id = "TextInputField-13")
+    @FindBy(xpath = "//label[contains(normalize-space(), 'Адрес прописки')]/following::input[1]")
     private WebElement fieldAddress;
 
     @FindBy(xpath = "//button[text() = 'Далее']")
