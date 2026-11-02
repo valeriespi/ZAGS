@@ -151,7 +151,7 @@ public class ApplicationsTests {
     }
 
     @Test
-    public void StatusCheckTest() {
+    public void StatusCheckMarriageTest() {
         ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
                 "Иванов", "Иван", "Ivanovich",
                 "12345678910", "12345678", "Гродно");
@@ -163,10 +163,6 @@ public class ApplicationsTests {
                 "Иванова", "Катя", "Ivanovna",
                 "01012000", "12345678");
 
-        AdminRegistrationData adminRegistration = new AdminRegistrationData(
-                "Петров", "Петр", "Petrovich",
-                "12345678910", "12345678", "01011980");
-
         ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
         ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
         MarriageRegistrationCitizenDataForm marriageRegistrationCitizenDataForm =
@@ -174,8 +170,6 @@ public class ApplicationsTests {
         MarriageRegistrationServiceDataForm marriageRegistrationServiceDataForm =
                 new MarriageRegistrationServiceDataForm(driver);
         ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
-        AdminDataForm adminDataForm = new AdminDataForm(driver);
-        ApplicationTable applicationTable = new ApplicationTable(driver);
 
         mainPage.clickButtonLoginAsUser();
         applicantDataForm.fillInAllFields(applicantDataFormVO);
@@ -186,10 +180,119 @@ public class ApplicationsTests {
         marriageRegistrationServiceDataForm.fillInAllFields(marriageRegistration);
         marriageRegistrationServiceDataForm.clickButtonFinish();
 
-        applicationStatusPage.clickButtonRefresh();
-
-        String applicationNumber = applicationStatusPage.getApplicationNumber();
+        String applicationNumber = waitRealApplicationNumber(applicationStatusPage);
         String statusFromStatusPage = applicationStatusPage.getStatus();
+
+        String actualStatus = checkStatusInAdminTable(applicationNumber);
+
+        Assertions.assertEquals(statusFromStatusPage.replace(".", ""),
+                actualStatus.replace(".", ""),
+                "Статус заявки " + applicationNumber +
+                        " из таблицы не совпал со статусом со страницы 'Статус заявки'");
+    }
+
+    @Test
+    public void StatusCheckBirthTest() {
+        ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
+                "Иванов", "Иван", "Ivanovich",
+                "12345678910", "12345678", "Гродно");
+
+        BirthRegistrationData birthRegistration = new BirthRegistrationData(
+                "Иванов", "Иван", "Ivanovich",
+                "01012000", "12345678", "Male",
+                "Гродно", "Гродно", "Катя",
+                "Иван", "Катя", "Иван");
+
+        ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
+        ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
+        BirthRegistrationCitizenDataForm birthRegistrationCitizenDataForm =
+                new BirthRegistrationCitizenDataForm(driver);
+        BirthRegistrationServiceDataForm birthRegistrationServiceDataForm =
+                new BirthRegistrationServiceDataForm(driver);
+        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+
+        mainPage.clickButtonLoginAsUser();
+        applicantDataForm.fillInAllFields(applicantDataFormVO);
+        applicantDataForm.clickButtonNext();
+        choiceOfServicePage.clickButtonBirthRegistration();
+        birthRegistrationCitizenDataForm.fillInAllFields(birthRegistration);
+        birthRegistrationCitizenDataForm.clickButtonNext();
+        birthRegistrationServiceDataForm.fillInAllFields(birthRegistration);
+        birthRegistrationServiceDataForm.clickButtonFinish();
+
+        String applicationNumber = waitRealApplicationNumber(applicationStatusPage);
+        String statusFromStatusPage = applicationStatusPage.getStatus();
+
+        String actualStatus = checkStatusInAdminTable(applicationNumber);
+
+        Assertions.assertEquals(statusFromStatusPage.replace(".", ""),
+                actualStatus.replace(".", ""),
+                "Статус заявки " + applicationNumber +
+                        " из таблицы не совпал со статусом со страницы 'Статус заявки'");
+    }
+
+    @Test
+    public void StatusCheckDeathTest() {
+        ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
+                "Иванов", "Иван", "Ivanovich",
+                "12345678910", "12345678", "Гродно");
+
+        DeathRegistrationData deathRegistration = new DeathRegistrationData(
+                "Иванов", "Иван", "Ivanovich",
+                "Гродно", "01012000", "12345678",
+                "Male", "01012000", "Гродно");
+
+        ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
+        ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
+        DeathRegistrationCitizenDataForm deathRegistrationCitizenDataForm = new DeathRegistrationCitizenDataForm(driver);
+        DeathRegistrationServiceDataForm deathRegistrationServiceDataForm = new DeathRegistrationServiceDataForm(driver);
+        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+
+        mainPage.clickButtonLoginAsUser();
+        applicantDataForm.fillInAllFields(applicantDataFormVO);
+        applicantDataForm.clickButtonNext();
+        choiceOfServicePage.clickButtonDeathRegistration();
+        deathRegistrationCitizenDataForm.fillInAllFields(deathRegistration);
+        deathRegistrationCitizenDataForm.clickButtonNext();
+        deathRegistrationServiceDataForm.fillInAllFields(deathRegistration);
+        deathRegistrationServiceDataForm.clickButtonFinish();
+
+        String applicationNumber = waitRealApplicationNumber(applicationStatusPage);
+        String statusFromStatusPage = applicationStatusPage.getStatus();
+
+        String actualStatus = checkStatusInAdminTable(applicationNumber);
+
+        Assertions.assertEquals(statusFromStatusPage.replace(".", ""),
+                actualStatus.replace(".", ""),
+                "Статус заявки " + applicationNumber +
+                        " из таблицы не совпал со статусом со страницы 'Статус заявки'");
+    }
+
+    private String waitRealApplicationNumber(ApplicationStatusPage applicationStatusPage) {
+        applicationStatusPage.clickButtonRefresh();
+        String applicationNumber = applicationStatusPage.getApplicationNumber();
+        int attempts = 0;
+        while ((applicationNumber.isBlank() || applicationNumber.equals("null")) && attempts < 10) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+            applicationStatusPage.clickButtonRefresh();
+            applicationNumber = applicationStatusPage.getApplicationNumber();
+            attempts++;
+        }
+        return applicationNumber;
+    }
+
+    private String checkStatusInAdminTable(String applicationNumber) {
+        AdminDataForm adminDataForm = new AdminDataForm(driver);
+        ApplicationTable applicationTable = new ApplicationTable(driver);
+
+        AdminRegistrationData adminRegistration = new AdminRegistrationData(
+                "Петров", "Петр", "Petrovich",
+                "12345678910", "12345678", "01011980");
 
         driver.get("https://user:senlatest@regoffice.senla.eu");
         mainPage.clickButtonLoginAsAdmin();
@@ -197,11 +300,6 @@ public class ApplicationsTests {
         adminDataForm.fillInAllFields(adminRegistration);
         adminDataForm.clickButtonNext();
 
-        String actualStatus = applicationTable.getApplicationStatus(applicationNumber);
-
-        Assertions.assertEquals(statusFromStatusPage.replace(".", ""),
-                actualStatus.replace(".", ""),
-                "Статус заявки " + applicationNumber +
-                        " из таблицы не совпал со статусом со страницы 'Статус заявки'");
+        return applicationTable.getApplicationStatus(applicationNumber);
     }
 }
