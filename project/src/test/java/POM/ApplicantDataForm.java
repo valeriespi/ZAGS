@@ -1,12 +1,18 @@
 package POM;
 
 import ValueObject.ApplicantDataFormData;
+import io.qameta.allure.Step;
+import WebDriver.WaitHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class ApplicantDataForm {
+
+    private static final Logger log = LogManager.getLogger(ApplicantDataForm.class);
 
     @FindBy(xpath = "//label[contains(normalize-space(), 'Фамилия')]/following::input[1]")
     private WebElement fieldLastName;
@@ -29,20 +35,29 @@ public class ApplicantDataForm {
     @FindBy(xpath = "//button[text() = 'Далее']")
     private WebElement buttonNext;
 
+    private final WebDriver driver;
+
     public ApplicantDataForm(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Заполнение всех полей формы \"Данные заявителя\"")
     public void fillInAllFields(ApplicantDataFormData applicantDataForm) {
+        WaitHelper.waitForVisible(driver, fieldLastName);
+        log.info("Заполнение формы \"Данные заявителя\"");
         fieldLastName.sendKeys(applicantDataForm.lastNameDataApplicant());
         fieldName.sendKeys(applicantDataForm.nameDataApplicant());
         fieldPatronymic.sendKeys(applicantDataForm.patronymicDataApplicant());
         fieldPhone.sendKeys(applicantDataForm.phoneDataApplicant());
         fieldPassport.sendKeys(applicantDataForm.passportDataApplicant());
         fieldAddress.sendKeys(applicantDataForm.addressDataApplicant());
+        log.debug("Форма \"Данные заявителя\" заполнена");
     }
 
+    @Step("Нажатие кнопки \"Далее\"")
     public void clickButtonNext() {
+        log.info("Нажатие кнопки \"Далее\"");
         buttonNext.click();
     }
 }

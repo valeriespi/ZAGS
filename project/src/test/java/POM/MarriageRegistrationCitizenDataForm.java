@@ -1,12 +1,18 @@
 package POM;
 
 import ValueObject.MarriageRegistrationData;
+import io.qameta.allure.Step;
+import WebDriver.WaitHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MarriageRegistrationCitizenDataForm {
+
+    private static final Logger log = LogManager.getLogger(MarriageRegistrationCitizenDataForm.class);
 
     @FindBy(xpath = "//label[contains(normalize-space(), 'Фамилия')]/following::input[1]")
     private WebElement fieldLastName;
@@ -32,11 +38,17 @@ public class MarriageRegistrationCitizenDataForm {
     @FindBy(xpath = "//button[text() = 'Далее']")
     private WebElement buttonNext;
 
+    private final WebDriver driver;
+
     public MarriageRegistrationCitizenDataForm(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Заполнение всех полей формы \"Данные гражданина\"")
     public void fillInAllFields(MarriageRegistrationData marriageRegistration) {
+        WaitHelper.waitForVisible(driver, fieldLastName);
+        log.info("Заполнение формы \"Данные гражданина\"");
         fieldLastName.sendKeys(marriageRegistration.lastNameCitizenData());
         fieldName.sendKeys(marriageRegistration.nameCitizenData());
         fieldPatronymic.sendKeys(marriageRegistration.patronymicCitizenData());
@@ -44,9 +56,12 @@ public class MarriageRegistrationCitizenDataForm {
         fieldPassport.sendKeys(marriageRegistration.passportCitizenData());
         fieldGender.sendKeys(marriageRegistration.genderCitizenData());
         fieldAddress.sendKeys(marriageRegistration.addressCitizenData());
+        log.debug("Форма \"Данные гражданина\" заполнена");
     }
 
+    @Step("Нажатие кнопки \"Далее\"")
     public void clickButtonNext() {
+        log.info("Нажатие кнопки \"Далее\"");
         buttonNext.click();
     }
 }

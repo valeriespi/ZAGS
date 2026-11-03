@@ -3,6 +3,9 @@
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/../../project/build/classes/java/main" />
     <exclude-output />
+    <content url="file://$MODULE_DIR$/../../project/build/generated/sources/annotationProcessor/java/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../project/build/generated/sources/annotationProcessor/java/main" isTestSource="false" generated="true" />
+    </content>
     <content url="file://$MODULE_DIR$/../../project/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../project/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../project/src/main/resources" type="java-resource" />
@@ -10,6 +13,7 @@
     <orderEntry type="jdk" jdkName="liberica-24" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-java:4.51.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.qameta.allure:allure-jupiter:3.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-devtools-latest:4.51.0" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-devtools-v153:4.51.0" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-devtools-v154:4.51.0" level="project" />
@@ -22,6 +26,7 @@
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-firefox-driver:4.51.0" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-ie-driver:4.51.0" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-safari-driver:4.51.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.qameta.allure:allure-java-commons:3.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.jspecify:jspecify:1.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-json:4.51.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.auto.service:auto-service-annotations:1.1.1" level="project" />
@@ -40,6 +45,7 @@
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-http:4.51.0" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-manager:4.51.0" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-os:4.51.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.qameta.allure:allure-model:3.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:failureaccess:1.0.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
     <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.50.0" level="project" />
@@ -47,5 +53,12 @@
     <orderEntry type="library" name="Gradle: io.opentelemetry:opentelemetry-sdk-metrics:1.66.0" level="project" />
     <orderEntry type="library" name="Gradle: io.opentelemetry:opentelemetry-sdk-logs:1.66.0" level="project" />
     <orderEntry type="library" name="Gradle: io.opentelemetry:opentelemetry-common:1.66.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.qameta.allure:allure-junit-platform:3.0.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-launcher:6.1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-api:6.1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.slf4j:slf4j-api:2.0.19" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:6.1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-commons:6.1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.opentest4j:opentest4j:1.3.0" level="project" />
   </component>
 </module>
