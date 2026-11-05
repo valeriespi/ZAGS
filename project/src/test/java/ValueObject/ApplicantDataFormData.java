@@ -27,22 +27,16 @@ public record ApplicantDataFormData(
         if (patronymicDataApplicant.length() > 100) {
             throw new IllegalArgumentException("Отчество заявителя не более 100 символов");
         }
-        if (!patronymicDataApplicant.matches("^[A-Za-z]+$")) {
-            throw new IllegalArgumentException("Отчество заявителя: только латиница без спецсимволов");
-        }
         if (phoneDataApplicant != null && !phoneDataApplicant.isBlank()) {
             if (phoneDataApplicant.length() > 11) {
                 throw new IllegalArgumentException("Телефон не более 11 символов");
-            }
-            if (!phoneDataApplicant.matches("^[A-Za-z0-9]+$")) {
-                throw new IllegalArgumentException("Телефон: доступны только латиница и цифры");
             }
         }
         if (passportDataApplicant == null || passportDataApplicant.isBlank()) {
             throw new IllegalArgumentException("Паспорт заявителя обязателен");
         }
-        if (!passportDataApplicant.matches("^[А-Яа-яЁё0-8]{1,8}$")) {
-            throw new IllegalArgumentException("Паспорт заявителя: до 8 символов, только русские буквы и цифры 0-8");
+        if (passportDataApplicant.length() > 8) {
+            throw new IllegalArgumentException("Паспорт заявителя не более 8 символов");
         }
         if (addressDataApplicant != null && !addressDataApplicant.isBlank()) {
             if (addressDataApplicant.length() > 50) {

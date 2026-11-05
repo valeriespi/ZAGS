@@ -29,16 +29,14 @@ public record MarriageRegistrationData(
             throw new IllegalArgumentException("Отчество гражданина обязательно");
         if (patronymicCitizenData.length() > 100)
             throw new IllegalArgumentException("Отчество гражданина не более 100 символов");
-        if (!patronymicCitizenData.matches("^[A-Za-z]+$"))
-            throw new IllegalArgumentException("Отчество гражданина: только латиница без спецсимволов");
         if (dateOfBirthCitizenData == null || dateOfBirthCitizenData.isBlank())
             throw new IllegalArgumentException("Дата рождения обязательна");
         if (passportCitizenData == null || passportCitizenData.isBlank())
             throw new IllegalArgumentException("Паспорт гражданина обязателен");
-        if (!passportCitizenData.matches("^[А-Яа-яЁё0-8]{1,8}$"))
-            throw new IllegalArgumentException("Паспорт гражданина: до 8 символов, только русские буквы и цифры 0-8");
-        if (genderCitizenData == null || (!genderCitizenData.equals("Male") && !genderCitizenData.equals("Female"))) {
-            throw new IllegalArgumentException("Пол должен быть 'Male' или 'Female'");
+        if (passportCitizenData.length() > 8)
+            throw new IllegalArgumentException("Паспорт гражданина не более 8 символов");
+        if (genderCitizenData == null) {
+            throw new IllegalArgumentException("Пол обязателен");
         }
         if (addressCitizenData != null && !addressCitizenData.isBlank()) {
             if (addressCitizenData.length() > 50)
@@ -75,8 +73,8 @@ public record MarriageRegistrationData(
         if (spousesPassportServiceData == null || spousesPassportServiceData.isBlank()) {
             throw new IllegalArgumentException("Паспорт супруги обязателен");
         }
-        if (!spousesPassportServiceData.matches("^[А-Яа-яЁё0-8]{1,8}$")) {
-            throw new IllegalArgumentException("Паспорт супруги: до 8 символов, только русские буквы и цифры 0-8");
+        if (spousesPassportServiceData.length() > 8) {
+            throw new IllegalArgumentException("Паспорт супруги не более 8 символов");
         }
         if (newLastNameServiceData != null && newLastNameServiceData.length() > 100) {
             throw new IllegalArgumentException("Новая фамилия не более 100 символов");

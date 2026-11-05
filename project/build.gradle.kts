@@ -21,6 +21,8 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.14.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("io.rest-assured:rest-assured:6.3.0")
+    testImplementation("com.fasterxml.jackson.core:jackson-databind:2.20.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     implementation(platform("io.qameta.allure:allure-bom:3.0.1"))
@@ -29,6 +31,7 @@ dependencies {
     testImplementation(platform("org.apache.logging.log4j:log4j-bom:2.25.1"))
     testImplementation("org.apache.logging.log4j:log4j-api")
     testRuntimeOnly("org.apache.logging.log4j:log4j-core")
+    testRuntimeOnly("org.apache.logging.log4j:log4j-slf4j2-impl")
 
     add("agent", "org.aspectj:aspectjweaver:$aspectJVersion")
 }
@@ -36,6 +39,9 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     jvmArgs = listOf("-javaagent:${agent.singleFile}")
+    doFirst {
+        delete("build/allure-results")
+    }
     finalizedBy("allureReport")
 }
 

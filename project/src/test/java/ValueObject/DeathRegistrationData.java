@@ -31,17 +31,11 @@ public record DeathRegistrationData(
         if (citizenPatronymic.length() > 200) {
             throw new IllegalArgumentException("Отчество гражданина не более 200 символов");
         }
-        if (!citizenPatronymic.matches("^[A-Za-z]+$")) {
-            throw new IllegalArgumentException("Отчество гражданина: только латиница без спецсимволов");
-        }
         if (citizenAddress == null || citizenAddress.isBlank()) {
             throw new IllegalArgumentException("Адрес прописки обязателен");
         }
         if (citizenAddress.length() > 30) {
             throw new IllegalArgumentException("Адрес прописки не более 30 символов");
-        }
-        if (!citizenAddress.matches("^[A-Za-zА-Яа-яЁё\\s\\-.,/]+$")) {
-            throw new IllegalArgumentException("Адрес прописки: только буквы и спецсимволы");
         }
         if (citizenDateOfBirth == null || citizenDateOfBirth.isBlank()) {
             throw new IllegalArgumentException("Дата рождения обязательна");
@@ -49,11 +43,11 @@ public record DeathRegistrationData(
         if (citizenPassport == null || citizenPassport.isBlank()) {
             throw new IllegalArgumentException("Номер паспорта обязателен");
         }
-        if (!citizenPassport.matches("^[А-Яа-яЁё0-8]{1,8}$")) {
-            throw new IllegalArgumentException("Паспорт: до 8 символов, только русские буквы и цифры 0-8");
+        if (citizenPassport.length() > 8) {
+            throw new IllegalArgumentException("Паспорт не более 8 символов");
         }
-        if (citizenGender == null || (!citizenGender.equals("Male") && !citizenGender.equals("Female"))) {
-            throw new IllegalArgumentException("Пол должен быть 'Male' или 'Female'");
+        if (citizenGender == null) {
+            throw new IllegalArgumentException("Пол обязателен");
         }
         if (serviceDateOfDeath == null || serviceDateOfDeath.isBlank()) {
             throw new IllegalArgumentException("Дата смерти обязательна");
@@ -63,9 +57,6 @@ public record DeathRegistrationData(
         }
         if (servicePlaceOfDeath.length() > 50) {
             throw new IllegalArgumentException("Место смерти не более 50 символов");
-        }
-        if (!servicePlaceOfDeath.matches("^[A-Za-zА-Яа-яЁё\\s\\-.,/]+$")) {
-            throw new IllegalArgumentException("Место смерти: только буквы и спецсимволы");
         }
     }
 }

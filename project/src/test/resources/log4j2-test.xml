@@ -17,6 +17,7 @@
     <Loggers>
         <Logger name="POM" level="DEBUG"/>
         <Logger name="PageElement" level="DEBUG"/>
+        <Logger name="Api" level="DEBUG"/>
         <Root level="INFO">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>

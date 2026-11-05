@@ -63,14 +63,14 @@ public class ApplicationsTests {
         log.info("Старт теста регистрации брака");
 
         ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "12345678910", "12345678", "Гродно");
 
         MarriageRegistrationData marriageRegistration = new MarriageRegistrationData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "01012000", "12345678", "Male",
                 "Гродно", "01012000", "Иванов",
-                "Иванова", "Катя", "Ivanovna",
+                "Иванова", "Катя", "Ивановна",
                 "01012000", "12345678");
 
         ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
@@ -105,11 +105,11 @@ public class ApplicationsTests {
         log.info("Старт теста регистрации рождения");
 
         ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "12345678910", "12345678", "Гродно");
 
         BirthRegistrationData birthRegistration = new BirthRegistrationData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "01012000", "12345678", "Male",
                 "Гродно", "Гродно", "Катя",
                 "Иван", "Катя", "Иван");
@@ -146,11 +146,11 @@ public class ApplicationsTests {
         log.info("Старт теста регистрации смерти");
 
         ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "12345678910", "12345678", "Гродно");
 
         DeathRegistrationData deathRegistration = new DeathRegistrationData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "Гродно", "01012000", "12345678",
                 "Male", "01012000", "Гродно");
 
@@ -215,14 +215,14 @@ public class ApplicationsTests {
         log.info("Старт теста проверки статуса заявки брака");
 
         ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "12345678910", "12345678", "Гродно");
 
         MarriageRegistrationData marriageRegistration = new MarriageRegistrationData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "01012000", "12345678", "Male",
                 "Гродно", "01012000", "Иванов",
-                "Иванова", "Катя", "Ivanovna",
+                "Иванова", "Катя", "Ивановна",
                 "01012000", "12345678");
 
         ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
@@ -272,11 +272,11 @@ public class ApplicationsTests {
         log.info("Старт теста проверки статуса заявки рождения");
 
         ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "12345678910", "12345678", "Гродно");
 
         BirthRegistrationData birthRegistration = new BirthRegistrationData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович ",
                 "01012000", "12345678", "Male",
                 "Гродно", "Гродно", "Катя",
                 "Иван", "Катя", "Иван");
@@ -328,11 +328,11 @@ public class ApplicationsTests {
         log.info("Старт теста проверки статуса заявки смерти");
 
         ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "12345678910", "12345678", "Гродно");
 
         DeathRegistrationData deathRegistration = new DeathRegistrationData(
-                "Иванов", "Иван", "Ivanovich",
+                "Иванов", "Иван", "Иванович",
                 "Гродно", "01012000", "12345678",
                 "Male", "01012000", "Гродно");
 
@@ -400,7 +400,7 @@ public class ApplicationsTests {
         ApplicationTable applicationTable = new ApplicationTable(driver);
 
         AdminRegistrationData adminRegistration = new AdminRegistrationData(
-                "Петров", "Петр", "Petrovich",
+                "Петров", "Петр", "Петрович",
                 "12345678910", "12345678", "01011980");
 
         log.info("Переход на главную страницу и вход как администратор");
