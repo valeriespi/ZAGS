@@ -18,6 +18,10 @@
         <Logger name="POM" level="DEBUG"/>
         <Logger name="PageElement" level="DEBUG"/>
         <Logger name="Api" level="DEBUG"/>
+        <Logger name="Db" level="DEBUG"/>
+        <Logger name="org.hibernate.SQL" level="DEBUG"/>
+        <Logger name="org.hibernate.orm.jdbc.bind" level="DEBUG"/>
+        <Logger name="tests" level="DEBUG"/>
         <Root level="INFO">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>

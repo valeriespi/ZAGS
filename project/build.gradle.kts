@@ -23,6 +23,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("io.rest-assured:rest-assured:6.3.0")
     testImplementation("com.fasterxml.jackson.core:jackson-databind:2.20.1")
+    testImplementation("org.postgresql:postgresql:42.7.7")
+    testImplementation("org.hibernate.orm:hibernate-core:7.4.15.Final")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     implementation(platform("io.qameta.allure:allure-bom:3.0.1"))

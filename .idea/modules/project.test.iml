@@ -18,6 +18,8 @@
     <orderEntry type="library" name="Gradle: io.qameta.allure:allure-jupiter:3.0.1" level="project" />
     <orderEntry type="library" name="Gradle: io.rest-assured:rest-assured:6.3.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.20.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.postgresql:postgresql:42.7.7" level="project" />
+    <orderEntry type="library" name="Gradle: org.hibernate.orm:hibernate-core:7.4.15.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.25.1" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-devtools-latest:4.51.0" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-devtools-v153:4.51.0" level="project" />
@@ -42,6 +44,8 @@
     <orderEntry type="library" name="Gradle: io.rest-assured:json-path:6.3.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.20.1" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.20" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta.persistence:jakarta.persistence-api:3.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta.transaction:jakarta.transaction-api:2.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.jspecify:jspecify:1.0.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: biz.aQute.bnd:biz.aQute.bnd.annotation:7.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.50.0" level="project" />
@@ -95,8 +99,20 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-api:6.1.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:6.1.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.qameta.allure:allure-junit-platform:3.0.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.checkerframework:checker-qual:3.49.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate.models:hibernate-models:1.1.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss.logging:jboss-logging:3.6.3.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:jaxb-runtime:4.0.7" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.xml.bind:jakarta.xml.bind-api:4.0.5" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.inject:jakarta.inject-api:2.0.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.antlr:antlr4-runtime:4.13.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.slf4j:slf4j-api:2.0.19" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-commons:6.1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:jaxb-core:4.0.7" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: jakarta.activation:jakarta.activation-api:2.1.4" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.eclipse.angus:angus-activation:2.0.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:txw2:4.0.7" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.sun.istack:istack-commons-runtime:4.1.2" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="project.main" />
 </module>
