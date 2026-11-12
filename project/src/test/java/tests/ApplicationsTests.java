@@ -1,5 +1,6 @@
 package tests;
 
+import Common.Config;
 import POM.*;
 import PageElement.ApplicationTable;
 import ValueObject.AdminRegistrationData;
@@ -7,6 +8,7 @@ import ValueObject.ApplicantDataFormData;
 import ValueObject.BirthRegistrationData;
 import ValueObject.DeathRegistrationData;
 import ValueObject.MarriageRegistrationData;
+import ValueObject.TestData;
 import WebDriver.WaitHelper;
 import WebDriver.WebDriverSingleton;
 import io.qameta.allure.*;
@@ -35,7 +37,7 @@ public class ApplicationsTests {
     public void setData() {
         driver = WebDriverSingleton.getInstance();
         driver.manage().window().maximize();
-        driver.get("https://user:senlatest@regoffice.senla.eu");
+        driver.get(Config.standUrl());
         waitForMainPageLoaded();
         log.info("Тест запущен, главная страница открыта");
 
@@ -62,16 +64,8 @@ public class ApplicationsTests {
     public void marriageRegistrationTest() {
         log.info("Старт теста регистрации брака");
 
-        ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Иванович",
-                "12345678910", "12345678", "Гродно");
-
-        MarriageRegistrationData marriageRegistration = new MarriageRegistrationData(
-                "Иванов", "Иван", "Иванович",
-                "01012000", "12345678", "Male",
-                "Гродно", "01012000", "Иванов",
-                "Иванова", "Катя", "Ивановна",
-                "01012000", "12345678");
+        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
+        MarriageRegistrationData marriageRegistration = TestData.marriageRegistrationData();
 
         ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
         ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
@@ -104,15 +98,8 @@ public class ApplicationsTests {
     public void birthRegistrationTest() {
         log.info("Старт теста регистрации рождения");
 
-        ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Иванович",
-                "12345678910", "12345678", "Гродно");
-
-        BirthRegistrationData birthRegistration = new BirthRegistrationData(
-                "Иванов", "Иван", "Иванович",
-                "01012000", "12345678", "Male",
-                "Гродно", "Гродно", "Катя",
-                "Иван", "Катя", "Иван");
+        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
+        BirthRegistrationData birthRegistration = TestData.birthRegistrationData();
 
         ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
         ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
@@ -145,14 +132,8 @@ public class ApplicationsTests {
     public void deathRegistrationTest() {
         log.info("Старт теста регистрации смерти");
 
-        ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Иванович",
-                "12345678910", "12345678", "Гродно");
-
-        DeathRegistrationData deathRegistration = new DeathRegistrationData(
-                "Иванов", "Иван", "Иванович",
-                "Гродно", "01012000", "12345678",
-                "Male", "01012000", "Гродно");
+        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
+        DeathRegistrationData deathRegistration = TestData.deathRegistrationData();
 
         ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
         ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
@@ -214,16 +195,8 @@ public class ApplicationsTests {
     public void StatusCheckMarriageTest() {
         log.info("Старт теста проверки статуса заявки брака");
 
-        ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Иванович",
-                "12345678910", "12345678", "Гродно");
-
-        MarriageRegistrationData marriageRegistration = new MarriageRegistrationData(
-                "Иванов", "Иван", "Иванович",
-                "01012000", "12345678", "Male",
-                "Гродно", "01012000", "Иванов",
-                "Иванова", "Катя", "Ивановна",
-                "01012000", "12345678");
+        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
+        MarriageRegistrationData marriageRegistration = TestData.marriageRegistrationData();
 
         ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
         ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
@@ -271,15 +244,8 @@ public class ApplicationsTests {
     public void StatusCheckBirthTest() {
         log.info("Старт теста проверки статуса заявки рождения");
 
-        ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Иванович",
-                "12345678910", "12345678", "Гродно");
-
-        BirthRegistrationData birthRegistration = new BirthRegistrationData(
-                "Иванов", "Иван", "Иванович ",
-                "01012000", "12345678", "Male",
-                "Гродно", "Гродно", "Катя",
-                "Иван", "Катя", "Иван");
+        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
+        BirthRegistrationData birthRegistration = TestData.birthRegistrationData();
 
         ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
         ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
@@ -327,14 +293,8 @@ public class ApplicationsTests {
     public void StatusCheckDeathTest() {
         log.info("Старт теста проверки статуса заявки смерти");
 
-        ApplicantDataFormData applicantDataFormVO = new ApplicantDataFormData(
-                "Иванов", "Иван", "Иванович",
-                "12345678910", "12345678", "Гродно");
-
-        DeathRegistrationData deathRegistration = new DeathRegistrationData(
-                "Иванов", "Иван", "Иванович",
-                "Гродно", "01012000", "12345678",
-                "Male", "01012000", "Гродно");
+        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
+        DeathRegistrationData deathRegistration = TestData.deathRegistrationData();
 
         ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
         ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
@@ -399,12 +359,10 @@ public class ApplicationsTests {
         AdminDataForm adminDataForm = new AdminDataForm(driver);
         ApplicationTable applicationTable = new ApplicationTable(driver);
 
-        AdminRegistrationData adminRegistration = new AdminRegistrationData(
-                "Петров", "Петр", "Петрович",
-                "12345678910", "12345678", "01011980");
+        AdminRegistrationData adminRegistration = TestData.adminData();
 
         log.info("Переход на главную страницу и вход как администратор");
-        driver.get("https://user:senlatest@regoffice.senla.eu");
+        driver.get(Config.standUrl());
         waitForMainPageLoaded();
         mainPage.clickButtonLoginAsAdmin();
 

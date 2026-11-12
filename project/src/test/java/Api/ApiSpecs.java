@@ -1,5 +1,6 @@
 package Api;
 
+import Common.Config;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -18,15 +19,21 @@ import java.nio.charset.StandardCharsets;
 
 public class ApiSpecs {
 
-    private static final String BASIC_USER = "user";
-    private static final String BASIC_PASSWORD = "senlatest";
     private static final String BASE_URL = "https://regoffice.senla.eu";
+
+    private static String basicUser() {
+        return Config.standUser();
+    }
+
+    private static String basicPassword() {
+        return Config.standPassword();
+    }
 
     private static final Logger restAssuredLog = LogManager.getLogger("Api.RestAssured");
 
     public static final RequestSpecification REQUEST_SPEC = new RequestSpecBuilder()
             .setBaseUri(BASE_URL)
-            .setAuth(RestAssured.preemptive().basic(BASIC_USER, BASIC_PASSWORD))
+            .setAuth(RestAssured.preemptive().basic(basicUser(), basicPassword()))
             .setContentType(ContentType.JSON)
             .addHeader("Channel", "web")
             .addFilter(new RequestLoggingFilter(logStream()))

@@ -1,5 +1,6 @@
 package org.example;
 
+import Common.Config;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,7 +11,7 @@ import java.time.Duration;
 public class Main {
     public static void main(String[] args) {
 
-        final String BASE_URL = "https://user:senlatest@regoffice.senla.eu";
+        final String BASE_URL = Config.standUrl();
         WebDriver driver = null;
         WebDriverWait wait = null;
 

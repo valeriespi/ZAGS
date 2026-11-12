@@ -1,5 +1,7 @@
 package Db;
 
+import Common.Config;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -17,8 +19,8 @@ public final class DbConnector {
     private static final String HOST = System.getProperty("db.host", "86.57.161.116");
     private static final int PORT = Integer.getInteger("db.port", 50432);
     private static final String DATABASE = System.getProperty("db.database", "register_office");
-    private static final String USER = System.getProperty("db.user", "user");
-    private static final String PASSWORD = System.getProperty("db.password", "user_senla");
+    private static final String USER = Config.dbUser();
+    private static final String PASSWORD = Config.dbPassword();
 
     private static Connection connection;
 

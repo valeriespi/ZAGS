@@ -22,6 +22,11 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.14.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("io.rest-assured:rest-assured:6.3.0")
+    testImplementation("net.datafaker:datafaker:2.7.0")
+    testImplementation("io.cucumber:cucumber-java:7.34.9")
+    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.34.9")
+    testImplementation("org.junit.platform:junit-platform-suite")
+    testImplementation("io.qameta.allure:allure-cucumber7-jvm")
     testImplementation("com.fasterxml.jackson.core:jackson-databind:2.20.1")
     testImplementation("org.postgresql:postgresql:42.7.7")
     testImplementation("org.hibernate.orm:hibernate-core:7.4.15.Final")
@@ -41,6 +46,8 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     jvmArgs = listOf("-javaagent:${agent.singleFile}")
+    listOf("stand.user", "stand.password", "db.host", "db.port", "db.database", "db.user", "db.password")
+        .forEach { name -> System.getProperty(name)?.let { systemProperty(name, it) } }
     doFirst {
         delete("build/allure-results")
     }
