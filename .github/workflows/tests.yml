@@ -7,7 +7,10 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Windows]
+    defaults:
+      run:
+        shell: powershell
     env:
       STAND_USER: ${{ secrets.STAND_USER }}
       STAND_PASSWORD: ${{ secrets.STAND_PASSWORD }}
@@ -23,22 +26,31 @@ jobs:
 
       - name: Check stand access
         run: |
-          code=$(curl -s -o /dev/null -w "%{http_code}" -u "${STAND_USER}:${STAND_PASSWORD}" https://regoffice.senla.eu/ || echo "connection failed")
-          echo "Stand response: $code"
-          google-chrome --version || echo "Chrome not found"
+          $code = curl.exe -s -o NUL -w "%{http_code}" -u "${env:STAND_USER}:${env:STAND_PASSWORD}" https://regoffice.senla.eu/
+          "Stand response: $code"
 
       - name: Run tests
         working-directory: project
-        run: ./gradlew test --no-daemon
+        run: .\gradlew.bat test -Dselenoid=true --no-daemon
 
       - name: Diagnostics on failures
         if: failure()
         run: |
-          grep -h -o '<failure message="[^"]*' project/build/test-results/test/TEST-*.xml 2>/dev/null | head -6 || echo "no test results"
+          $files = Get-ChildItem 'project/build/test-results/test/TEST-*.xml' -ErrorAction SilentlyContinue
+          if ($files) {
+            $files | Select-String -Pattern '<failure message="[^"]*' | Select-Object -First 6 | ForEach-Object { $_.Line.Trim() }
+          } else {
+            'no test results'
+          }
 
       - name: Pack Allure report
         if: always()
-        run: zip -r allure-report.zip project/build/reports/allure-report/allureReport || echo "no report to pack"
+        run: |
+          if (Test-Path 'project/build/reports/allure-report/allureReport') {
+            Compress-Archive -Path 'project/build/reports/allure-report/allureReport' -DestinationPath 'allure-report.zip' -Force
+          } else {
+            'no report to pack'
+          }
 
       - name: Upload report artifact
         if: always()
