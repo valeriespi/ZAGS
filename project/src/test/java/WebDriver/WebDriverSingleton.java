@@ -30,7 +30,9 @@ public class WebDriverSingleton {
                 }
             } else {
                 log.info("Создан локальный браузер Chrome");
-                driver.set(new ChromeDriver());
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu");
+                driver.set(new ChromeDriver(options));
             }
             driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         }

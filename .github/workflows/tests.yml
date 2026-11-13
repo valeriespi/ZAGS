@@ -59,5 +59,4 @@ jobs:
           subject: "ZAGS autotests ${{ job.status }}"
           to: ${{ secrets.MAIL_TO }}
           from: ${{ secrets.MAIL_USER }}
-          body: "Scheduled run finished with status: ${{ job.status }}. Allure report is attached."
-          attachments: allure-report.zip
+          body: "Scheduled run finished with status: ${{ job.status }}. Download the allure-report artifact on the run page: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
