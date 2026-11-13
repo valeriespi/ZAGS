@@ -59,7 +59,3 @@ tasks.test {
     }
     finalizedBy("allureReport")
 }
-
-tasks.named("allureReport") {
-    dependsOn(tasks.test)
-}

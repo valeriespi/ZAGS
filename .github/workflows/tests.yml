@@ -21,13 +21,24 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Check stand access
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" -u "${STAND_USER}:${STAND_PASSWORD}" https://regoffice.senla.eu/ || echo "connection failed")
+          echo "Stand response: $code"
+          google-chrome --version || echo "Chrome not found"
+
       - name: Run tests
         working-directory: project
         run: ./gradlew test --no-daemon
 
+      - name: Diagnostics on failures
+        if: failure()
+        run: |
+          grep -h -o '<failure message="[^"]*' project/build/test-results/test/TEST-*.xml 2>/dev/null | head -6 || echo "no test results"
+
       - name: Pack Allure report
         if: always()
-        run: zip -r allure-report.zip project/build/reports/allure-report/allureReport/awesome
+        run: zip -r allure-report.zip project/build/reports/allure-report/allureReport || echo "no report to pack"
 
       - name: Upload report artifact
         if: always()
@@ -35,6 +46,7 @@ jobs:
         with:
           name: allure-report
           path: allure-report.zip
+          if-no-files-found: ignore
 
       - name: Send report by email
         if: always()
