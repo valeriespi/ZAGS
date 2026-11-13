@@ -54,6 +54,6 @@ public class BirthRegistrationServiceDataForm {
     @Step("Нажатие кнопки \"Завершить\"")
     public void clickButtonFinish() {
         log.info("Нажатие кнопки \"Завершить\"");
-        buttonFinish.click();
+        WaitHelper.clickWithRetry(driver, buttonFinish);
     }
 }

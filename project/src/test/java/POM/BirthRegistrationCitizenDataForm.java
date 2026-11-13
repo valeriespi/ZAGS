@@ -62,6 +62,6 @@ public class BirthRegistrationCitizenDataForm {
     @Step("Нажатие кнопки \"Далее\"")
     public void clickButtonNext() {
         log.info("Нажатие кнопки \"Далее\"");
-        buttonNext.click();
+        WaitHelper.clickWithRetry(driver, buttonNext);
     }
 }

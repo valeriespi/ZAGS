@@ -33,20 +33,20 @@ public class MainPage {
     public void clickButtonLoginAsUser() {
         WaitHelper.waitForClickable(driver, buttonLoginAsUser);
         log.info("Главная страница: нажатие кнопки \"Войти как пользователь\"");
-        buttonLoginAsUser.click();
+        WaitHelper.clickWithRetry(driver, buttonLoginAsUser);
     }
 
     @Step("Нажатие кнопки \"Войти как администратор\"")
     public void clickButtonLoginAsAdmin() {
         WaitHelper.waitForClickable(driver, buttonLoginAsAdmin);
         log.info("Главная страница: нажатие кнопки \"Войти как администратор\"");
-        buttonLoginAsAdmin.click();
+        WaitHelper.clickWithRetry(driver, buttonLoginAsAdmin);
     }
 
     @Step("Нажатие кнопки \"Заказать справку\"")
     public void clickButtonOrderCertificate() {
         WaitHelper.waitForClickable(driver, buttonOrderCertificate);
         log.info("Главная страница: нажатие кнопки \"Заказать справку\"");
-        buttonOrderCertificate.click();
+        WaitHelper.clickWithRetry(driver, buttonOrderCertificate);
     }
 }

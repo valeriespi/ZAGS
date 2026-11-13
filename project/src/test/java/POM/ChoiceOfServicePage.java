@@ -33,20 +33,20 @@ public class ChoiceOfServicePage {
     public void clickButtonMarriageRegistration() {
         WaitHelper.waitForClickable(driver, buttonMarriageRegistration);
         log.info("Выбор услуги: нажатие кнопки \"Регистрация брака\"");
-        buttonMarriageRegistration.click();
+        WaitHelper.clickWithRetry(driver, buttonMarriageRegistration);
     }
 
     @Step("Нажатие кнопки \"Регистрация рождения\"")
     public void clickButtonBirthRegistration() {
         WaitHelper.waitForClickable(driver, buttonBirthRegistration);
         log.info("Выбор услуги: нажатие кнопки \"Регистрация рождения\"");
-        buttonBirthRegistration.click();
+        WaitHelper.clickWithRetry(driver, buttonBirthRegistration);
     }
 
     @Step("Нажатие кнопки \"Регистрация смерти\"")
     public void clickButtonDeathRegistration() {
         WaitHelper.waitForClickable(driver, buttonDeathRegistration);
         log.info("Выбор услуги: нажатие кнопки \"Регистрация смерти\"");
-        buttonDeathRegistration.click();
+        WaitHelper.clickWithRetry(driver, buttonDeathRegistration);
     }
 }

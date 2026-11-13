@@ -1,11 +1,16 @@
 package WebDriver;
 
+import Common.Config;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 public class WebDriverSingleton {
@@ -15,10 +20,19 @@ public class WebDriverSingleton {
     @Step("Создание браузера и получение экземпляра WebDriver")
     public static WebDriver getInstance() {
         if (driver.get() == null) {
-            driver.set(new ChromeDriver());
-            driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
             Logger log = LogManager.getLogger(WebDriverSingleton.class);
-            log.info("Браузер создан");
+            if (Boolean.parseBoolean(System.getProperty("selenoid", "false"))) {
+                log.info("Браузер создаётся в Selenoid: {}", Config.selenoidUrl());
+                try {
+                    driver.set(new RemoteWebDriver(new URL(Config.selenoidUrl()), new ChromeOptions()));
+                } catch (MalformedURLException e) {
+                    throw new IllegalStateException("Некорректный URL Selenoid: " + Config.selenoidUrl(), e);
+                }
+            } else {
+                log.info("Создан локальный браузер Chrome");
+                driver.set(new ChromeDriver());
+            }
+            driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         }
         return driver.get();
     }

@@ -22,8 +22,6 @@ public final class DbConnector {
     private static final String USER = Config.dbUser();
     private static final String PASSWORD = Config.dbPassword();
 
-    private static Connection connection;
-
     private DbConnector() {
     }
 
@@ -50,11 +48,8 @@ public final class DbConnector {
     }
 
     public static Connection getConnection() throws SQLException {
-        if (connection == null || connection.isClosed()) {
-            log.debug("Подключение к БД: {}", url());
-            connection = DriverManager.getConnection(url(), USER, PASSWORD);
-            log.debug("Соединение установлено");
-        }
+        Connection connection = DriverManager.getConnection(url(), USER, PASSWORD);
+        log.debug("Соединение установлено: {}", url());
         return connection;
     }
 }

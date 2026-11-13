@@ -42,14 +42,14 @@ public class ApplicationStatusPage {
     public void clickButtonRefresh() {
         WaitHelper.waitForClickable(driver, buttonRefresh);
         log.info("Нажатие кнопки \"Обновить\"");
-        buttonRefresh.click();
+        WaitHelper.clickWithRetry(driver, buttonRefresh);
     }
 
     @Step("Нажатие кнопки \"Создать новую заявку\"")
     public void clickButtonCreateNewApplication() {
         WaitHelper.waitForClickable(driver, buttonCreateNewApplication);
         log.info("Нажатие кнопки \"Создать новую заявку\"");
-        buttonCreateNewApplication.click();
+        WaitHelper.clickWithRetry(driver, buttonCreateNewApplication);
     }
 
     @Step("Извлечение номера заявки из текста")

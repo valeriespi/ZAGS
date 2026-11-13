@@ -46,7 +46,13 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     jvmArgs = listOf("-javaagent:${agent.singleFile}")
-    listOf("stand.user", "stand.password", "db.host", "db.port", "db.database", "db.user", "db.password")
+    systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+    systemProperty("junit.jupiter.execution.parallel.mode.classes.default", "concurrent")
+    systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
+    systemProperty("junit.jupiter.execution.parallel.config.strategy", "fixed")
+    systemProperty("junit.jupiter.execution.parallel.config.fixed.parallelism", "3")
+    systemProperty("junit.jupiter.execution.parallel.config.fixed.max-pool-size", "3")
+    listOf("stand.user", "stand.password", "db.host", "db.port", "db.database", "db.user", "db.password", "selenoid", "selenoid.url")
         .forEach { name -> System.getProperty(name)?.let { systemProperty(name, it) } }
     doFirst {
         delete("build/allure-results")

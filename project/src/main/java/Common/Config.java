@@ -25,6 +25,17 @@ public final class Config {
         return "https://" + standUser() + ":" + standPassword() + "@regoffice.senla.eu";
     }
 
+    public static String selenoidUrl() {
+        String value = System.getProperty("selenoid.url");
+        if (value == null || value.isBlank()) {
+            value = System.getenv("SELENOID_URL");
+        }
+        if (value == null || value.isBlank()) {
+            value = "http://localhost:4444/wd/hub";
+        }
+        return value;
+    }
+
     private static String required(String property, String envVariable) {
         String value = System.getProperty(property);
         if (value == null || value.isBlank()) {
