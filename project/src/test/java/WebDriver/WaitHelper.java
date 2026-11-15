@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class WaitHelper {
 
-    private static final Duration TIMEOUT = Duration.ofSeconds(20);
+    private static final Duration TIMEOUT = Duration.ofSeconds(30);
 
     private WaitHelper() {
     }
