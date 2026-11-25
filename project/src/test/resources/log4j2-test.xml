@@ -15,10 +15,10 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="POM" level="DEBUG"/>
-        <Logger name="PageElement" level="DEBUG"/>
-        <Logger name="Api" level="DEBUG"/>
-        <Logger name="Db" level="DEBUG"/>
+        <Logger name="pom" level="DEBUG"/>
+        <Logger name="pageElement" level="DEBUG"/>
+        <Logger name="api" level="DEBUG"/>
+        <Logger name="db" level="DEBUG"/>
         <Logger name="org.hibernate.SQL" level="DEBUG"/>
         <Logger name="org.hibernate.orm.jdbc.bind" level="DEBUG"/>
         <Logger name="tests" level="DEBUG"/>

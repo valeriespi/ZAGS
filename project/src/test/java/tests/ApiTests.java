@@ -1,6 +1,6 @@
 package tests;
 
-import Api.ApiSpecs;
+import api.ApiSpecs;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -14,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ValueObject.GenerateValues;
+import valueObject.GenerateValues;
 
 import java.util.HashMap;
 import java.util.List;

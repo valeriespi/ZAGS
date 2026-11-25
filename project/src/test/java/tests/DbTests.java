@@ -1,10 +1,10 @@
 package tests;
 
-import Db.Applicant;
-import Db.Application;
-import Db.Citizen;
-import Db.DbConnector;
-import Db.Staff;
+import db.TableApplicant;
+import db.TableApplication;
+import db.TableCitizen;
+import db.DbConnector;
+import db.TableStaff;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -25,10 +25,10 @@ public class DbTests {
     private static final SessionFactory SESSION_FACTORY = new Configuration()
             .addProperties(DbConnector.properties())
             .setProperty("hibernate.hbm2ddl.auto", "none")
-            .addAnnotatedClass(Applicant.class)
-            .addAnnotatedClass(Citizen.class)
-            .addAnnotatedClass(Application.class)
-            .addAnnotatedClass(Staff.class)
+            .addAnnotatedClass(TableApplicant.class)
+            .addAnnotatedClass(TableCitizen.class)
+            .addAnnotatedClass(TableApplication.class)
+            .addAnnotatedClass(TableStaff.class)
             .buildSessionFactory();
 
     @Test
@@ -43,14 +43,14 @@ public class DbTests {
         try (Session session = SESSION_FACTORY.openSession()) {
             session.beginTransaction();
 
-            Applicant applicant = new Applicant()
+            TableApplicant applicant = new TableApplicant()
                     .setSurname("Иванов")
                     .setName("Иван")
                     .setMiddlename("Иванович")
                     .setPassportNumber("12345678")
                     .setPhoneNumber("12345678910")
                     .setRegistrationAddress("Гродно");
-            Citizen citizen = new Citizen()
+            TableCitizen citizen = new TableCitizen()
                     .setSurname("Иванов")
                     .setName("Иван")
                     .setMiddlename("Иванович")
@@ -61,7 +61,7 @@ public class DbTests {
             session.persist(applicant);
             session.persist(citizen);
 
-            Application application = new Application()
+            TableApplication application = new TableApplication()
                     .setCitizenId(citizen.getCitizenId())
                     .setApplicantId(applicant.getApplicantId())
                     .setKindOfApplication("Получение свидетельства о браке")
@@ -75,9 +75,9 @@ public class DbTests {
         }
 
         try (Session session = SESSION_FACTORY.openSession()) {
-            Applicant savedApplicant = session.find(Applicant.class, applicantId);
-            Citizen savedCitizen = session.find(Citizen.class, citizenId);
-            Application savedApplication = session.find(Application.class, applicationId);
+            TableApplicant savedApplicant = session.find(TableApplicant.class, applicantId);
+            TableCitizen savedCitizen = session.find(TableCitizen.class, citizenId);
+            TableApplication savedApplication = session.find(TableApplication.class, applicationId);
 
             Assertions.assertNotNull(savedApplicant, "Заявитель не найден в БД");
             Assertions.assertEquals("Иванов", savedApplicant.getSurname());
@@ -114,7 +114,7 @@ public class DbTests {
         long staffId;
         try (Session session = SESSION_FACTORY.openSession()) {
             session.beginTransaction();
-            Staff staff = new Staff()
+            TableStaff staff = new TableStaff()
                     .setSurname("Иванов")
                     .setName("Иван")
                     .setMiddlename("Иванович")
@@ -128,7 +128,7 @@ public class DbTests {
         Assertions.assertTrue(staffId > 0, "Hibernate не вернул ID администратора");
 
         try (Session session = SESSION_FACTORY.openSession()) {
-            Staff savedStaff = session.find(Staff.class, staffId);
+            TableStaff savedStaff = session.find(TableStaff.class, staffId);
             Assertions.assertNotNull(savedStaff, "Администратор не найден в БД");
             Assertions.assertEquals("Иванов", savedStaff.getSurname());
             Assertions.assertEquals("Иван", savedStaff.getName());

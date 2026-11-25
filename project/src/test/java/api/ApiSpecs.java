@@ -1,4 +1,4 @@
-package Api;
+package api;
 
 import Common.Config;
 import io.restassured.RestAssured;

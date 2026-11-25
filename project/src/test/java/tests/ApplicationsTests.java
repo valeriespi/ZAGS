@@ -1,16 +1,16 @@
 package tests;
 
 import Common.Config;
-import POM.*;
-import PageElement.ApplicationTable;
-import ValueObject.ValuesAdminRegistrationDataForm;
-import ValueObject.ValuesApplicantDataForm;
-import ValueObject.ValuesBirthRegistrationDataForm;
-import ValueObject.ValuesDeathRegistrationDataForm;
-import ValueObject.ValuesMarriageRegistrationDataForm;
-import ValueObject.GenerateValues;
-import WebDriver.WaitHelper;
-import WebDriver.WebDriverSingleton;
+import pom.*;
+import pageElement.ElementApplicationTable;
+import valueObject.ValuesAdminRegistrationDataForm;
+import valueObject.ValuesApplicantDataForm;
+import valueObject.ValuesBirthRegistrationDataForm;
+import valueObject.ValuesDeathRegistrationDataForm;
+import valueObject.ValuesMarriageRegistrationDataForm;
+import valueObject.GenerateValues;
+import webDriver.WaitHelper;
+import webDriver.WebDriverSingleton;
 import io.qameta.allure.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -347,7 +347,7 @@ public class ApplicationsTests {
     @Step("Вход как администратор и поиск статуса заявки в таблице администрирования заявок")
     private String checkStatusInAdminTable(String applicationNumber) {
         PageAdminRegistrationDataForm adminDataForm = new PageAdminRegistrationDataForm(driver);
-        ApplicationTable applicationTable = new ApplicationTable(driver);
+        ElementApplicationTable applicationTable = new ElementApplicationTable(driver);
 
         ValuesAdminRegistrationDataForm adminRegistration = GenerateValues.adminData();
 

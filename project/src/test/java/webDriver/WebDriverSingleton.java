@@ -1,4 +1,4 @@
-package WebDriver;
+package webDriver;
 
 import Common.Config;
 import io.qameta.allure.Step;

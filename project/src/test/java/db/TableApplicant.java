@@ -1,4 +1,4 @@
-package Db;
+package db;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,12 +8,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "citizens", schema = "reg_office")
-public class Citizen {
+@Table(name = "applicants", schema = "reg_office")
+public class TableApplicant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer citizenId;
+    private Integer applicantId;
 
     @Column(name = "surname")
     private String surname;
@@ -27,17 +27,14 @@ public class Citizen {
     @Column(name = "passportnumber")
     private String passportNumber;
 
-    @Column(name = "dateofbirth")
-    private String dateOfBirth;
-
-    @Column(name = "gender")
-    private String gender;
+    @Column(name = "phonenumber")
+    private String phoneNumber;
 
     @Column(name = "registration_address")
     private String registrationAddress;
 
-    public int getCitizenId() {
-        return citizenId;
+    public int getApplicantId() {
+        return applicantId;
     }
 
     public String getSurname() {
@@ -56,49 +53,40 @@ public class Citizen {
         return passportNumber;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public String getGender() {
-        return gender;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getRegistrationAddress() {
         return registrationAddress;
     }
 
-    public Citizen setSurname(String surname) {
+    public TableApplicant setSurname(String surname) {
         this.surname = surname;
         return this;
     }
 
-    public Citizen setName(String name) {
+    public TableApplicant setName(String name) {
         this.name = name;
         return this;
     }
 
-    public Citizen setMiddlename(String middlename) {
+    public TableApplicant setMiddlename(String middlename) {
         this.middlename = middlename;
         return this;
     }
 
-    public Citizen setPassportNumber(String passportNumber) {
+    public TableApplicant setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
         return this;
     }
 
-    public Citizen setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public TableApplicant setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 
-    public Citizen setGender(String gender) {
-        this.gender = gender;
-        return this;
-    }
-
-    public Citizen setRegistrationAddress(String registrationAddress) {
+    public TableApplicant setRegistrationAddress(String registrationAddress) {
         this.registrationAddress = registrationAddress;
         return this;
     }

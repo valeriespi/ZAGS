@@ -1,4 +1,4 @@
-package PageElement;
+package pageElement;
 
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
@@ -8,20 +8,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import WebDriver.WaitHelper;
+import webDriver.WaitHelper;
 
 import java.util.List;
 
-public class ApplicationTable {
+public class ElementApplicationTable {
 
-    private static final Logger log = LogManager.getLogger(ApplicationTable.class);
+    private static final Logger log = LogManager.getLogger(ElementApplicationTable.class);
 
     @FindBy(xpath = "//th[contains(normalize-space(), 'Заявитель')]/ancestor::table[1]")
     private WebElement applicationTable;
 
     private final WebDriver driver;
 
-    public ApplicationTable(WebDriver driver) {
+    public ElementApplicationTable(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

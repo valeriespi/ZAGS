@@ -1,15 +1,15 @@
 package stepsOfCucumberTests;
 
 import Common.Config;
-import POM.PageApplicantDataForm;
-import POM.PageApplicationStatus;
-import POM.PageChoiceOfService;
-import POM.PageMain;
-import POM.PageMarriageRegistrationCitizenDataForm;
-import POM.PageMarriageRegistrationServiceDataForm;
-import ValueObject.ValuesMarriageRegistrationDataForm;
-import ValueObject.GenerateValues;
-import WebDriver.WebDriverSingleton;
+import pom.PageApplicantDataForm;
+import pom.PageApplicationStatus;
+import pom.PageChoiceOfService;
+import pom.PageMain;
+import pom.PageMarriageRegistrationCitizenDataForm;
+import pom.PageMarriageRegistrationServiceDataForm;
+import valueObject.ValuesMarriageRegistrationDataForm;
+import valueObject.GenerateValues;
+import webDriver.WebDriverSingleton;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

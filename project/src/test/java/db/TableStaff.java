@@ -1,4 +1,4 @@
-package Db;
+package db;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "staff", schema = "reg_office")
-public class Staff {
+public class TableStaff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,32 +38,32 @@ public class Staff {
         return staffId;
     }
 
-    public Staff setSurname(String surname) {
+    public TableStaff setSurname(String surname) {
         this.surname = surname;
         return this;
     }
 
-    public Staff setName(String name) {
+    public TableStaff setName(String name) {
         this.name = name;
         return this;
     }
 
-    public Staff setMiddlename(String middlename) {
+    public TableStaff setMiddlename(String middlename) {
         this.middlename = middlename;
         return this;
     }
 
-    public Staff setDateOfBirth(LocalDate dateOfBirth) {
+    public TableStaff setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
         return this;
     }
 
-    public Staff setPassportNumber(String passportNumber) {
+    public TableStaff setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
         return this;
     }
 
-    public Staff setPhoneNumber(String phoneNumber) {
+    public TableStaff setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
     }

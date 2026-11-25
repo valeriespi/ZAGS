@@ -1,4 +1,4 @@
-package Db;
+package db;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +11,7 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @Table(name = "applications", schema = "reg_office")
 @DynamicInsert
-public class Application {
+public class TableApplication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,22 +56,22 @@ public class Application {
         return channel;
     }
 
-    public Application setCitizenId(Integer citizenId) {
+    public TableApplication setCitizenId(Integer citizenId) {
         this.citizenId = citizenId;
         return this;
     }
 
-    public Application setApplicantId(Integer applicantId) {
+    public TableApplication setApplicantId(Integer applicantId) {
         this.applicantId = applicantId;
         return this;
     }
 
-    public Application setKindOfApplication(String kindOfApplication) {
+    public TableApplication setKindOfApplication(String kindOfApplication) {
         this.kindOfApplication = kindOfApplication;
         return this;
     }
 
-    public Application setChannel(String channel) {
+    public TableApplication setChannel(String channel) {
         this.channel = channel;
         return this;
     }
