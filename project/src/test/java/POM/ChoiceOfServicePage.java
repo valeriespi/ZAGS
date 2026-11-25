@@ -1,8 +1,7 @@
 package POM;
 
 import io.qameta.allure.Step;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,8 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import WebDriver.WaitHelper;
 
 public class ChoiceOfServicePage {
-
-    private static final Logger log = LogManager.getLogger(ChoiceOfServicePage.class);
 
     @FindBy(xpath = "//button[text() = 'Регистрация брака']")
     private WebElement buttonMarriageRegistration;
@@ -31,22 +28,22 @@ public class ChoiceOfServicePage {
 
     @Step("Нажатие кнопки \"Регистрация брака\"")
     public void clickButtonMarriageRegistration() {
-        WaitHelper.waitForClickable(driver, buttonMarriageRegistration);
-        log.info("Выбор услуги: нажатие кнопки \"Регистрация брака\"");
-        WaitHelper.clickWithRetry(driver, buttonMarriageRegistration);
+        WaitHelper.waitForEnabled(driver, buttonMarriageRegistration);
+        buttonMarriageRegistration.click();
+        WaitHelper.waitForVisible(driver, By.xpath("//label[contains(normalize-space(), 'Фамилия')]/following::input[1]"));
     }
 
     @Step("Нажатие кнопки \"Регистрация рождения\"")
     public void clickButtonBirthRegistration() {
-        WaitHelper.waitForClickable(driver, buttonBirthRegistration);
-        log.info("Выбор услуги: нажатие кнопки \"Регистрация рождения\"");
-        WaitHelper.clickWithRetry(driver, buttonBirthRegistration);
+        WaitHelper.waitForEnabled(driver, buttonBirthRegistration);
+        buttonBirthRegistration.click();
+        WaitHelper.waitForVisible(driver, By.xpath("//label[contains(normalize-space(), 'Фамилия')]/following::input[1]"));
     }
 
     @Step("Нажатие кнопки \"Регистрация смерти\"")
     public void clickButtonDeathRegistration() {
-        WaitHelper.waitForClickable(driver, buttonDeathRegistration);
-        log.info("Выбор услуги: нажатие кнопки \"Регистрация смерти\"");
-        WaitHelper.clickWithRetry(driver, buttonDeathRegistration);
+        WaitHelper.waitForEnabled(driver, buttonDeathRegistration);
+        buttonDeathRegistration.click();
+        WaitHelper.waitForVisible(driver, By.xpath("//label[contains(normalize-space(), 'Фамилия')]/following::input[1]"));
     }
 }

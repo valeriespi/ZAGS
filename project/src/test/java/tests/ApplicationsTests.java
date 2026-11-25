@@ -38,16 +38,16 @@ public class ApplicationsTests {
         driver = WebDriverSingleton.getInstance();
         driver.manage().window().maximize();
         driver.get(Config.standUrl());
+        mainPage = new MainPage(driver);
         waitForMainPageLoaded();
         log.info("Тест запущен, главная страница открыта");
 
-        mainPage = new MainPage(driver);
     }
 
     @Step("Ожидание полной загрузки главной страницы")
     private void waitForMainPageLoaded() {
-        WaitHelper.waitForVisible(driver, By.xpath("//button[text() = 'Войти как пользователь']"));
-        log.debug("Главная страница полностью загружена, кнопка входа кликабельна");
+        mainPage.waitForButtonsEnabled();
+        log.debug("Главная страница полностью загружена, кнопки входа доступны");
     }
 
     @AfterEach
@@ -333,23 +333,13 @@ public class ApplicationsTests {
 
     @Step("Ожидание появления номера заявки после регистрации")
     private String waitRealApplicationNumber(ApplicationStatusPage applicationStatusPage) {
-        applicationStatusPage.clickButtonRefresh();
-        String applicationNumber = applicationStatusPage.getApplicationNumber();
-        if (applicationNumber.isBlank() || applicationNumber.equals("null")) {
-            log.warn("Номер заявки недоступен ('{}'), включаются повторные попытки обновления", applicationNumber);
-        }
+        String applicationNumber;
         int attempts = 0;
-        while ((applicationNumber.isBlank() || applicationNumber.equals("null")) && attempts < 10) {
-            attempts++;
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
-            }
+        do {
             applicationStatusPage.clickButtonRefresh();
             applicationNumber = applicationStatusPage.getApplicationNumber();
-        }
+            attempts++;
+        } while ((applicationNumber.isBlank() || applicationNumber.equals("null")) && attempts < 5);
         log.info("Номер заявки получен: '{}' (попыток обновления: {})", applicationNumber, attempts);
         return applicationNumber;
     }

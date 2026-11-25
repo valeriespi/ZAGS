@@ -3,6 +3,7 @@ package POM;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,9 +29,6 @@ public class ApplicationStatusPage {
     @FindBy(xpath = "//button[text() = 'Обновить']")
     private WebElement buttonRefresh;
 
-    @FindBy(xpath = "//button[text() = 'Создать новую заявку']")
-    private WebElement buttonCreateNewApplication;
-
     private final WebDriver driver;
 
     public ApplicationStatusPage(WebDriver driver) {
@@ -40,16 +38,9 @@ public class ApplicationStatusPage {
 
     @Step("Нажатие кнопки \"Обновить\"")
     public void clickButtonRefresh() {
-        WaitHelper.waitForClickable(driver, buttonRefresh);
-        log.info("Нажатие кнопки \"Обновить\"");
-        WaitHelper.clickWithRetry(driver, buttonRefresh);
-    }
-
-    @Step("Нажатие кнопки \"Создать новую заявку\"")
-    public void clickButtonCreateNewApplication() {
-        WaitHelper.waitForClickable(driver, buttonCreateNewApplication);
-        log.info("Нажатие кнопки \"Создать новую заявку\"");
-        WaitHelper.clickWithRetry(driver, buttonCreateNewApplication);
+        WaitHelper.waitForEnabled(driver, buttonRefresh);
+        buttonRefresh.click();
+        WaitHelper.waitForVisible(driver, By.xpath("//span[contains(text(), 'Ваша заявка №')]"));
     }
 
     @Step("Извлечение номера заявки из текста")

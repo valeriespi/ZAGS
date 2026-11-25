@@ -5,9 +5,6 @@ import Common.Config;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,9 +44,4 @@ public final class DbConnector {
         return properties;
     }
 
-    public static Connection getConnection() throws SQLException {
-        Connection connection = DriverManager.getConnection(url(), USER, PASSWORD);
-        log.debug("Соединение установлено: {}", url());
-        return connection;
-    }
 }

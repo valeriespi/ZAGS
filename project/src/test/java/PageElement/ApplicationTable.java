@@ -30,7 +30,7 @@ public class ApplicationTable {
     public String getApplicationStatus(String applicationNumber) {
 
         final int STATUS_COLUMN_INDEX = 4;
-        WaitHelper.waitForVisible(driver, applicationTable);
+        WaitHelper.waitForVisible(driver, By.xpath("//th[contains(normalize-space(), 'Заявитель')]/ancestor::table[1]"));
         List<WebElement> rows = applicationTable.findElements(By.cssSelector("tr"));
 
         for (WebElement r : rows) {

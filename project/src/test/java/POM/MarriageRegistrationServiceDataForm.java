@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 import WebDriver.WaitHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,7 +48,6 @@ public class MarriageRegistrationServiceDataForm {
 
     @Step("Заполнение всех полей формы \"Данные услуги\"")
     public void fillInAllFields(MarriageRegistrationData marriageRegistration) {
-        WaitHelper.waitForVisible(driver, fieldRegistrationDate);
         log.info("Заполнение формы \"Данные услуги\"");
         fieldRegistrationDate.sendKeys(marriageRegistration.dateOfRegistrationServiceData());
         fieldNewLastName.sendKeys(marriageRegistration.newLastNameServiceData());
@@ -61,7 +61,8 @@ public class MarriageRegistrationServiceDataForm {
 
     @Step("Нажатие кнопки \"Завершить\"")
     public void clickButtonFinish() {
-        log.info("Нажатие кнопки \"Завершить\"");
-        WaitHelper.clickWithRetry(driver, buttonFinish);
+        WaitHelper.waitForEnabled(driver, buttonFinish);
+        buttonFinish.click();
+        WaitHelper.waitForVisible(driver, By.xpath("//span[text() = 'Спасибо за обращение!']"));
     }
 }

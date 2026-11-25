@@ -46,7 +46,8 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     jvmArgs = listOf("-javaagent:${agent.singleFile}")
-    systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+    val parallel = System.getProperty("selenoid", "false").toBoolean()
+    systemProperty("junit.jupiter.execution.parallel.enabled", parallel.toString())
     systemProperty("junit.jupiter.execution.parallel.mode.classes.default", "concurrent")
     systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
     systemProperty("junit.jupiter.execution.parallel.config.strategy", "fixed")

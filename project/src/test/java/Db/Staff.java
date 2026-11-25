@@ -67,4 +67,28 @@ public class Staff {
         this.phoneNumber = phoneNumber;
         return this;
     }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }

@@ -16,10 +16,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 @Epic("ЗАГС")
@@ -111,7 +107,7 @@ public class DbTests {
 
     @Test
     @Story("Администраторы")
-    @Description("Создание администратора в БД через Hibernate и проверка сохранённой строки через JDBC")
+    @Description("Создание администратора в БД через Hibernate и проверка сохранённых данных")
     public void adminCreationTest() {
         Assumptions.assumeTrue(DbConnector.isReachable(), "БД недоступна, тест пропущен");
 
@@ -131,20 +127,15 @@ public class DbTests {
         }
         Assertions.assertTrue(staffId > 0, "Hibernate не вернул ID администратора");
 
-        try (Connection connection = DbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT * FROM reg_office.staff WHERE staffid = ?")) {
-            statement.setLong(1, staffId);
-            ResultSet row = statement.executeQuery();
-            Assertions.assertTrue(row.next(), "Администратор не найден в БД");
-            Assertions.assertEquals("Иванов", row.getString("surname"));
-            Assertions.assertEquals("Иван", row.getString("name"));
-            Assertions.assertEquals("Иванович", row.getString("middlename"));
-            Assertions.assertEquals("2000-01-01", row.getString("dateofbirth"));
-            Assertions.assertEquals("12345678", row.getString("passportnumber"));
-            Assertions.assertEquals("12345678910", row.getString("phonenumber"));
-        } catch (SQLException e) {
-            Assertions.fail("Ошибка обращения к БД", e);
+        try (Session session = SESSION_FACTORY.openSession()) {
+            Staff savedStaff = session.find(Staff.class, staffId);
+            Assertions.assertNotNull(savedStaff, "Администратор не найден в БД");
+            Assertions.assertEquals("Иванов", savedStaff.getSurname());
+            Assertions.assertEquals("Иван", savedStaff.getName());
+            Assertions.assertEquals("Иванович", savedStaff.getMiddlename());
+            Assertions.assertEquals(LocalDate.of(2000, 1, 1), savedStaff.getDateOfBirth());
+            Assertions.assertEquals("12345678", savedStaff.getPassportNumber());
+            Assertions.assertEquals("12345678910", savedStaff.getPhoneNumber());
         }
     }
 }

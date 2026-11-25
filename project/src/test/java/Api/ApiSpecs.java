@@ -21,19 +21,11 @@ public class ApiSpecs {
 
     private static final String BASE_URL = "https://regoffice.senla.eu";
 
-    private static String basicUser() {
-        return Config.standUser();
-    }
-
-    private static String basicPassword() {
-        return Config.standPassword();
-    }
-
     private static final Logger restAssuredLog = LogManager.getLogger("Api.RestAssured");
 
     public static final RequestSpecification REQUEST_SPEC = new RequestSpecBuilder()
             .setBaseUri(BASE_URL)
-            .setAuth(RestAssured.preemptive().basic(basicUser(), basicPassword()))
+            .setAuth(RestAssured.preemptive().basic(Config.standUser(), Config.standPassword()))
             .setContentType(ContentType.JSON)
             .addHeader("Channel", "web")
             .addFilter(new RequestLoggingFilter(logStream()))
