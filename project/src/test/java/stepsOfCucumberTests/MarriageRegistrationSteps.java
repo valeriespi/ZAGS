@@ -1,14 +1,14 @@
 package stepsOfCucumberTests;
 
 import Common.Config;
-import POM.ApplicantDataForm;
-import POM.ApplicationStatusPage;
-import POM.ChoiceOfServicePage;
-import POM.MainPage;
-import POM.MarriageRegistrationCitizenDataForm;
-import POM.MarriageRegistrationServiceDataForm;
-import ValueObject.MarriageRegistrationData;
-import ValueObject.TestData;
+import POM.PageApplicantDataForm;
+import POM.PageApplicationStatus;
+import POM.PageChoiceOfService;
+import POM.PageMain;
+import POM.PageMarriageRegistrationCitizenDataForm;
+import POM.PageMarriageRegistrationServiceDataForm;
+import ValueObject.ValuesMarriageRegistrationDataForm;
+import ValueObject.GenerateValues;
 import WebDriver.WebDriverSingleton;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
@@ -29,26 +29,26 @@ public class MarriageRegistrationSteps {
     public void openSiteAndLoginAsUser() {
         driver.get(Config.standUrl());
         driver.manage().window().maximize();
-        new MainPage(driver).clickButtonLoginAsUser();
+        new PageMain(driver).clickButtonLoginAsUser();
         log.info("Открыт сайт ЗАГС, выполнен вход как пользователь");
     }
 
     @When("заполнена форма заявителя случайными данными и нажата кнопка Далее")
     public void fillApplicantForm() {
-        ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
-        applicantDataForm.fillInAllFields(TestData.applicantData());
+        PageApplicantDataForm applicantDataForm = new PageApplicantDataForm(driver);
+        applicantDataForm.fillInAllFields(GenerateValues.applicantData());
         applicantDataForm.clickButtonNext();
         log.info("Форма заявителя заполнена случайными данными, нажата кнопка Далее");
     }
 
     @And("выбрана услуга регистрации брака и заполнены данные жениха и невесты")
     public void fillMarriageRegistrationData() {
-        new ChoiceOfServicePage(driver).clickButtonMarriageRegistration();
-        MarriageRegistrationData marriageData = TestData.marriageRegistrationData();
-        MarriageRegistrationCitizenDataForm citizenDataForm = new MarriageRegistrationCitizenDataForm(driver);
+        new PageChoiceOfService(driver).clickButtonMarriageRegistration();
+        ValuesMarriageRegistrationDataForm marriageData = GenerateValues.marriageRegistrationData();
+        PageMarriageRegistrationCitizenDataForm citizenDataForm = new PageMarriageRegistrationCitizenDataForm(driver);
         citizenDataForm.fillInAllFields(marriageData);
         citizenDataForm.clickButtonNext();
-        MarriageRegistrationServiceDataForm serviceDataForm = new MarriageRegistrationServiceDataForm(driver);
+        PageMarriageRegistrationServiceDataForm serviceDataForm = new PageMarriageRegistrationServiceDataForm(driver);
         serviceDataForm.fillInAllFields(marriageData);
         serviceDataForm.clickButtonFinish();
         log.info("Услуга \"Регистрация брака\" выбрана, данные жениха и невесты заполнены, заявка отправлена");
@@ -56,7 +56,7 @@ public class MarriageRegistrationSteps {
 
     @Then("на странице статуса отображается номер созданной заявки")
     public void checkApplicationNumberOnStatusPage() {
-        ApplicationStatusPage statusPage = new ApplicationStatusPage(driver);
+        PageApplicationStatus statusPage = new PageApplicationStatus(driver);
         Assertions.assertTrue(statusPage.isThanksTextDisplayed(), "Не отображается текст 'Спасибо за обращение!'");
         Assertions.assertFalse(statusPage.getApplicationNumber().equals("null"), "Номер заявки отображается как 'null'");
         log.info("Заявка создана, на странице статуса отображается номер: {}", statusPage.getApplicationNumber());

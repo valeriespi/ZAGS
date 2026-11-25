@@ -3,12 +3,12 @@ package tests;
 import Common.Config;
 import POM.*;
 import PageElement.ApplicationTable;
-import ValueObject.AdminRegistrationData;
-import ValueObject.ApplicantDataFormData;
-import ValueObject.BirthRegistrationData;
-import ValueObject.DeathRegistrationData;
-import ValueObject.MarriageRegistrationData;
-import ValueObject.TestData;
+import ValueObject.ValuesAdminRegistrationDataForm;
+import ValueObject.ValuesApplicantDataForm;
+import ValueObject.ValuesBirthRegistrationDataForm;
+import ValueObject.ValuesDeathRegistrationDataForm;
+import ValueObject.ValuesMarriageRegistrationDataForm;
+import ValueObject.GenerateValues;
 import WebDriver.WaitHelper;
 import WebDriver.WebDriverSingleton;
 import io.qameta.allure.*;
@@ -31,14 +31,14 @@ public class ApplicationsTests {
     private static final Logger log = LogManager.getLogger(ApplicationsTests.class);
 
     private WebDriver driver;
-    MainPage mainPage;
+    PageMain mainPage;
 
     @BeforeEach
     public void setData() {
         driver = WebDriverSingleton.getInstance();
         driver.manage().window().maximize();
         driver.get(Config.standUrl());
-        mainPage = new MainPage(driver);
+        mainPage = new PageMain(driver);
         waitForMainPageLoaded();
         log.info("Тест запущен, главная страница открыта");
 
@@ -64,15 +64,15 @@ public class ApplicationsTests {
     public void marriageRegistrationTest() {
         log.info("Старт теста регистрации брака");
 
-        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
-        MarriageRegistrationData marriageRegistration = TestData.marriageRegistrationData();
+        ValuesApplicantDataForm applicantDataFormVO = GenerateValues.applicantData();
+        ValuesMarriageRegistrationDataForm marriageRegistration = GenerateValues.marriageRegistrationData();
 
-        ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
-        ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
-        MarriageRegistrationCitizenDataForm marriageRegistrationCitizenDataForm =
-                new MarriageRegistrationCitizenDataForm(driver);
-        MarriageRegistrationServiceDataForm marriageRegistrationServiceDataForm =
-                new MarriageRegistrationServiceDataForm(driver);
+        PageApplicantDataForm applicantDataForm = new PageApplicantDataForm(driver);
+        PageChoiceOfService choiceOfServicePage = new PageChoiceOfService(driver);
+        PageMarriageRegistrationCitizenDataForm marriageRegistrationCitizenDataForm =
+                new PageMarriageRegistrationCitizenDataForm(driver);
+        PageMarriageRegistrationServiceDataForm marriageRegistrationServiceDataForm =
+                new PageMarriageRegistrationServiceDataForm(driver);
 
         mainPage.clickButtonLoginAsUser();
         log.debug("Пользователь вошёл, заполняется форма \"Данные заявителя\"");
@@ -98,15 +98,15 @@ public class ApplicationsTests {
     public void birthRegistrationTest() {
         log.info("Старт теста регистрации рождения");
 
-        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
-        BirthRegistrationData birthRegistration = TestData.birthRegistrationData();
+        ValuesApplicantDataForm applicantDataFormVO = GenerateValues.applicantData();
+        ValuesBirthRegistrationDataForm birthRegistration = GenerateValues.birthRegistrationData();
 
-        ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
-        ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
-        BirthRegistrationCitizenDataForm birthRegistrationCitizenDataForm =
-                new BirthRegistrationCitizenDataForm(driver);
-        BirthRegistrationServiceDataForm birthRegistrationServiceDataForm =
-                new BirthRegistrationServiceDataForm(driver);
+        PageApplicantDataForm applicantDataForm = new PageApplicantDataForm(driver);
+        PageChoiceOfService choiceOfServicePage = new PageChoiceOfService(driver);
+        PageBirthRegistrationCitizenDataForm birthRegistrationCitizenDataForm =
+                new PageBirthRegistrationCitizenDataForm(driver);
+        PageBirthRegistrationServiceDataForm birthRegistrationServiceDataForm =
+                new PageBirthRegistrationServiceDataForm(driver);
 
         mainPage.clickButtonLoginAsUser();
         log.debug("Пользователь вошёл, заполняется форма \"Данные заявителя\"");
@@ -132,13 +132,13 @@ public class ApplicationsTests {
     public void deathRegistrationTest() {
         log.info("Старт теста регистрации смерти");
 
-        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
-        DeathRegistrationData deathRegistration = TestData.deathRegistrationData();
+        ValuesApplicantDataForm applicantDataFormVO = GenerateValues.applicantData();
+        ValuesDeathRegistrationDataForm deathRegistration = GenerateValues.deathRegistrationData();
 
-        ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
-        ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
-        DeathRegistrationCitizenDataForm deathRegistrationCitizenDataForm = new DeathRegistrationCitizenDataForm(driver);
-        DeathRegistrationServiceDataForm deathRegistrationServiceDataForm = new DeathRegistrationServiceDataForm(driver);
+        PageApplicantDataForm applicantDataForm = new PageApplicantDataForm(driver);
+        PageChoiceOfService choiceOfServicePage = new PageChoiceOfService(driver);
+        PageDeathRegistrationCitizenDataForm deathRegistrationCitizenDataForm = new PageDeathRegistrationCitizenDataForm(driver);
+        PageDeathRegistrationServiceDataForm deathRegistrationServiceDataForm = new PageDeathRegistrationServiceDataForm(driver);
 
         mainPage.clickButtonLoginAsUser();
         log.debug("Пользователь вошёл, заполняется форма \"Данные заявителя\"");
@@ -159,7 +159,7 @@ public class ApplicationsTests {
     @Step("Проверка сообщений на странице успешной регистрации заявки")
     private void checkApplicationStatusPage() {
         WaitHelper.waitForVisible(driver, By.xpath("//span[text() = 'Спасибо за обращение!']"));
-        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+        PageApplicationStatus applicationStatusPage = new PageApplicationStatus(driver);
         log.debug("Открыта страница со статусом заявки, проверяются все сообщения");
 
         Assertions.assertTrue(applicationStatusPage.isThanksTextDisplayed(),
@@ -195,16 +195,16 @@ public class ApplicationsTests {
     public void StatusCheckMarriageTest() {
         log.info("Старт теста проверки статуса заявки брака");
 
-        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
-        MarriageRegistrationData marriageRegistration = TestData.marriageRegistrationData();
+        ValuesApplicantDataForm applicantDataFormVO = GenerateValues.applicantData();
+        ValuesMarriageRegistrationDataForm marriageRegistration = GenerateValues.marriageRegistrationData();
 
-        ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
-        ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
-        MarriageRegistrationCitizenDataForm marriageRegistrationCitizenDataForm =
-                new MarriageRegistrationCitizenDataForm(driver);
-        MarriageRegistrationServiceDataForm marriageRegistrationServiceDataForm =
-                new MarriageRegistrationServiceDataForm(driver);
-        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+        PageApplicantDataForm applicantDataForm = new PageApplicantDataForm(driver);
+        PageChoiceOfService choiceOfServicePage = new PageChoiceOfService(driver);
+        PageMarriageRegistrationCitizenDataForm marriageRegistrationCitizenDataForm =
+                new PageMarriageRegistrationCitizenDataForm(driver);
+        PageMarriageRegistrationServiceDataForm marriageRegistrationServiceDataForm =
+                new PageMarriageRegistrationServiceDataForm(driver);
+        PageApplicationStatus applicationStatusPage = new PageApplicationStatus(driver);
 
         mainPage.clickButtonLoginAsUser();
         log.debug("Пользователь вошёл, заполняется форма \"Данные заявителя\"");
@@ -244,16 +244,16 @@ public class ApplicationsTests {
     public void StatusCheckBirthTest() {
         log.info("Старт теста проверки статуса заявки рождения");
 
-        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
-        BirthRegistrationData birthRegistration = TestData.birthRegistrationData();
+        ValuesApplicantDataForm applicantDataFormVO = GenerateValues.applicantData();
+        ValuesBirthRegistrationDataForm birthRegistration = GenerateValues.birthRegistrationData();
 
-        ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
-        ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
-        BirthRegistrationCitizenDataForm birthRegistrationCitizenDataForm =
-                new BirthRegistrationCitizenDataForm(driver);
-        BirthRegistrationServiceDataForm birthRegistrationServiceDataForm =
-                new BirthRegistrationServiceDataForm(driver);
-        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+        PageApplicantDataForm applicantDataForm = new PageApplicantDataForm(driver);
+        PageChoiceOfService choiceOfServicePage = new PageChoiceOfService(driver);
+        PageBirthRegistrationCitizenDataForm birthRegistrationCitizenDataForm =
+                new PageBirthRegistrationCitizenDataForm(driver);
+        PageBirthRegistrationServiceDataForm birthRegistrationServiceDataForm =
+                new PageBirthRegistrationServiceDataForm(driver);
+        PageApplicationStatus applicationStatusPage = new PageApplicationStatus(driver);
 
         mainPage.clickButtonLoginAsUser();
         log.debug("Пользователь вошёл, заполняется форма \"Данные заявителя\"");
@@ -293,14 +293,14 @@ public class ApplicationsTests {
     public void StatusCheckDeathTest() {
         log.info("Старт теста проверки статуса заявки смерти");
 
-        ApplicantDataFormData applicantDataFormVO = TestData.applicantData();
-        DeathRegistrationData deathRegistration = TestData.deathRegistrationData();
+        ValuesApplicantDataForm applicantDataFormVO = GenerateValues.applicantData();
+        ValuesDeathRegistrationDataForm deathRegistration = GenerateValues.deathRegistrationData();
 
-        ApplicantDataForm applicantDataForm = new ApplicantDataForm(driver);
-        ChoiceOfServicePage choiceOfServicePage = new ChoiceOfServicePage(driver);
-        DeathRegistrationCitizenDataForm deathRegistrationCitizenDataForm = new DeathRegistrationCitizenDataForm(driver);
-        DeathRegistrationServiceDataForm deathRegistrationServiceDataForm = new DeathRegistrationServiceDataForm(driver);
-        ApplicationStatusPage applicationStatusPage = new ApplicationStatusPage(driver);
+        PageApplicantDataForm applicantDataForm = new PageApplicantDataForm(driver);
+        PageChoiceOfService choiceOfServicePage = new PageChoiceOfService(driver);
+        PageDeathRegistrationCitizenDataForm deathRegistrationCitizenDataForm = new PageDeathRegistrationCitizenDataForm(driver);
+        PageDeathRegistrationServiceDataForm deathRegistrationServiceDataForm = new PageDeathRegistrationServiceDataForm(driver);
+        PageApplicationStatus applicationStatusPage = new PageApplicationStatus(driver);
 
         mainPage.clickButtonLoginAsUser();
         log.debug("Пользователь вошёл, заполняется форма \"Данные заявителя\"");
@@ -332,7 +332,7 @@ public class ApplicationsTests {
     }
 
     @Step("Ожидание появления номера заявки после регистрации")
-    private String waitRealApplicationNumber(ApplicationStatusPage applicationStatusPage) {
+    private String waitRealApplicationNumber(PageApplicationStatus applicationStatusPage) {
         String applicationNumber;
         int attempts = 0;
         do {
@@ -346,10 +346,10 @@ public class ApplicationsTests {
 
     @Step("Вход как администратор и поиск статуса заявки в таблице администрирования заявок")
     private String checkStatusInAdminTable(String applicationNumber) {
-        AdminDataForm adminDataForm = new AdminDataForm(driver);
+        PageAdminRegistrationDataForm adminDataForm = new PageAdminRegistrationDataForm(driver);
         ApplicationTable applicationTable = new ApplicationTable(driver);
 
-        AdminRegistrationData adminRegistration = TestData.adminData();
+        ValuesAdminRegistrationDataForm adminRegistration = GenerateValues.adminData();
 
         log.info("Переход на главную страницу и вход как администратор");
         driver.get(Config.standUrl());

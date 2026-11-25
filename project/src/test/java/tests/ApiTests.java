@@ -14,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ValueObject.TestData;
+import ValueObject.GenerateValues;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,31 +33,31 @@ public class ApiTests {
 
     @Step("Формирование тела заявки на регистрацию брака")
     private Map<String, Object> weddingPayload() {
-        String groomSurname = TestData.maleSurname();
-        String groomName = TestData.maleName();
-        String groomPatronymic = TestData.malePatronymic();
+        String groomSurname = GenerateValues.maleSurname();
+        String groomName = GenerateValues.maleName();
+        String groomPatronymic = GenerateValues.malePatronymic();
         Map<String, Object> body = new HashMap<>();
         body.put("mode", REQUEST_WEDDING);
         body.put("personalLastName", groomSurname);
         body.put("personalFirstName", groomName);
         body.put("personalMiddleName", groomPatronymic);
-        body.put("personalPhoneNumber", TestData.phone());
-        body.put("personalNumberOfPassport", TestData.passport());
-        body.put("personalAddress", TestData.city());
+        body.put("personalPhoneNumber", GenerateValues.phone());
+        body.put("personalNumberOfPassport", GenerateValues.passport());
+        body.put("personalAddress", GenerateValues.city());
         body.put("citizenLastName", groomSurname);
         body.put("citizenFirstName", groomName);
         body.put("citizenMiddleName", groomPatronymic);
-        body.put("citizenBirthDate", TestData.isoDate());
-        body.put("citizenNumberOfPassport", TestData.passport());
+        body.put("citizenBirthDate", GenerateValues.isoDate());
+        body.put("citizenNumberOfPassport", GenerateValues.passport());
         body.put("citizenGender", "Male");
-        body.put("citizenAddress", TestData.city());
-        body.put("dateOfMarriage", TestData.isoDate());
+        body.put("citizenAddress", GenerateValues.city());
+        body.put("dateOfMarriage", GenerateValues.isoDate());
         body.put("newLastName", groomSurname);
-        body.put("anotherPersonLastName", TestData.femaleSurname());
-        body.put("anotherPersonFirstName", TestData.femaleName());
-        body.put("anotherPersonMiddleName", TestData.femalePatronymic());
-        body.put("birth_of_anotoherPerson", TestData.isoDate());
-        body.put("anotherPersonPassport", TestData.passport());
+        body.put("anotherPersonLastName", GenerateValues.femaleSurname());
+        body.put("anotherPersonFirstName", GenerateValues.femaleName());
+        body.put("anotherPersonMiddleName", GenerateValues.femalePatronymic());
+        body.put("birth_of_anotoherPerson", GenerateValues.isoDate());
+        body.put("anotherPersonPassport", GenerateValues.passport());
         body.put("birth_place", null);
         body.put("birth_mother", null);
         body.put("birth_father", null);
@@ -71,12 +71,12 @@ public class ApiTests {
     @Step("Формирование тела заявки на создание администратора")
     private Map<String, Object> adminPayload() {
         Map<String, Object> body = new HashMap<>();
-        body.put("dateofbirth", TestData.adminDateOfBirth());
-        body.put("personalFirstName", TestData.maleName());
-        body.put("personalLastName", TestData.maleSurname());
-        body.put("personalMiddleName", TestData.malePatronymic());
-        body.put("personalNumberOfPassport", TestData.passport());
-        body.put("personalPhoneNumber", TestData.phone());
+        body.put("dateofbirth", GenerateValues.adminDateOfBirth());
+        body.put("personalFirstName", GenerateValues.maleName());
+        body.put("personalLastName", GenerateValues.maleSurname());
+        body.put("personalMiddleName", GenerateValues.malePatronymic());
+        body.put("personalNumberOfPassport", GenerateValues.passport());
+        body.put("personalPhoneNumber", GenerateValues.phone());
         return body;
     }
 
